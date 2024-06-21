@@ -1,0 +1,26 @@
+CC = gcc
+VG = valgrind
+BIN = ./bin
+SRC = ./src
+INC = ./inc
+OBJ = ./obj
+
+VFLAGS = (--tool = memcheck --leak-check = full)
+CFLAGS = -Wall -g -o
+IFLAGS = -I $(INC)
+LDFLAGS = -c
+
+$(BIN)/test: $(OBJ)/client.o $(OBJ)/c_funct.o
+	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/client.o $(OBJ)/c_funct.o
+
+$(OBJ)/client.o: $(SRC)/client.c
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/client.c -o $(OBJ)/client.o
+
+$(OBJ)/c_funct.o: $(SRC)/c_funct.c
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/c_funct.c -o $(OBJ)/c_funct.o 
+
+
+clean:
+	rm $(OBJ)/*.o
+	rm $(BIN)/*
+
