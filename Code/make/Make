@@ -10,6 +10,13 @@ CFLAGS = -Wall -g -o
 IFLAGS = -I $(INC)
 LDFLAGS = -c
 
+admin:
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/admin.c -o $(OBJ)/admin.o
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/admin_funct.c -o $(OBJ)/admin_funct.o 
+	$(CC) $(CFLAGS) $(BIN)/adm_test $(OBJ)/admin.o $(OBJ)/admin_funct.o
+
+
+client:
 $(BIN)/test: $(OBJ)/client.o $(OBJ)/c_funct.o
 	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/client.o $(OBJ)/c_funct.o
 
