@@ -17,15 +17,15 @@ admin:
 
 
 client:
-$(BIN)/test: $(OBJ)/client.o $(OBJ)/c_funct.o
-	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/client.o $(OBJ)/c_funct.o
-
-$(OBJ)/client.o: $(SRC)/client.c
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/client.c -o $(OBJ)/client.o
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/client_funct.c -o $(OBJ)/client_funct.o 
+	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/client.o $(OBJ)/client_funct.o
 
-$(OBJ)/c_funct.o: $(SRC)/c_funct.c
-	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/c_funct.c -o $(OBJ)/c_funct.o 
-
+server:
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server.c -o $(OBJ)/server.o
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server_funct.c -o $(OBJ)/server_funct.o 
+	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/server.o $(OBJ)/server_funct.o
+	
 
 clean:
 	rm $(OBJ)/*.o

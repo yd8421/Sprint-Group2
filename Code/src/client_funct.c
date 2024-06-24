@@ -1,8 +1,15 @@
-#include<header.h>
+#include<client.h>
 
 void register_user(void);
+static void myflush(void);
+void main_menu(void);
+void call(void);
+void register_user(void);
+void login(void);
+void user_menu(void);
+void update_client_data(void);
 
-void myflush(void){
+static void myflush(void){
 	while(getchar() != '\n');
 }
 
