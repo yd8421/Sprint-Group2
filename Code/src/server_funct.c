@@ -30,7 +30,7 @@ void open_database() {
     }
 
     char *zErrMsg = 0;
-    const char *init_table1 = "CREATE TABLE IF NOT EXISTS forwardinfo (clientNumber TEXT PRIMARY KEY,forwardNumber INTEGER,isRegistered INTEGER,isActivated INTEGER,forwardType INTEGER);";
+    const char *init_table1 = "CREATE TABLE IF NOT EXISTS forwardinfo (clientNumber TEXT PRIMARY KEY,forwardNumber TEXT,isRegistered INTEGER,isActivated INTEGER,forwardType INTEGER);";
     rc = sqlite3_exec(db, init_table1, sql_select_callback, 0, &zErrMsg);
     if( rc ){
         // Log this section under ERROR
@@ -118,9 +118,9 @@ void delete_login_details(const char* userId) {
 }
 
 // Function to delete user data from SQLite database by client_number
-void delete_user_data(int client_number) {
+void delete_user_data(const char* client_number) {
     char sql_query[100];
-    sprintf(sql_query, "DELETE FROM user_data WHERE client_number = %d;", client_number);
+    sprintf(sql_query, "DELETE FROM user_data WHERE client_number ='%s';", client_number);
     
     char* errMsg = 0;
     int rc = sqlite3_exec(db, sql_query, NULL, 0, &errMsg);
@@ -144,9 +144,17 @@ void view_auth_table() {
         return;
     }
     
-    printf("Records from the authentication table\n");
+    int tableHeaderStatus=0;
+    
     printf("Client Number (User ID)\t| Password\t\n");
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        if(tableHeaderStatus == 0)
+        {
+            printf("Records from the authentication table:\n");
+            printf("Client Number (User ID)\t| Password\t\n");
+            printf("------------------------------------\t\n");
+            tableHeaderStatus++;
+        }
         printf("%s\t|%s\t\n", sqlite3_column_text(stmt, 0), sqlite3_column_text(stmt, 1));
     }
     
@@ -165,9 +173,16 @@ void view_forwarding_table() {
         return;
     }
     
-    printf("Records from the forwarding table\n");
-    printf("Client Number \t| Forwarding Number \t| Registration \t| Activation \t| Forwarding Type\t\n");
+    int tableHeaderStatus=0;
+    
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        if(tableHeaderStatus == 0)
+        {
+            printf("Records from the forwarding table:\n");
+            printf("Client Number \t| Forwarding Number \t| Registration \t| Activation \t| Forwarding Type\t\n");
+            printf("---------------------------------------------------------------------------------------\t\n");
+            tableHeaderStatus++;
+        }
         printf("%s\t| ", sqlite3_column_text(stmt, 0));
         printf("%s\t| ", sqlite3_column_text(stmt, 1));
         printf("%s\t| ", sqlite3_column_text(stmt, 2));
@@ -178,6 +193,65 @@ void view_forwarding_table() {
     sqlite3_finalize(stmt);
 }
 
+// Function to update forwarding number for a client
+void update_forwarding_number(const char* clientNumber, const char* forwardingNumber){
+    char sql_query[256];
+    char *zErrMsg = 0;
+    int rc;
+
+    sprintf(sql_query, "UPDATE forwardinfo SET ");
+    sprintf(sql_query + strlen(sql_query), "forwardNumber='%s'", forwardingNumber);
+    sprintf(sql_query + strlen(sql_query), " WHERE clientNumber='%s';", clientNumber);
+    //printf("[DEBUG] Prepared String: %s\n", sql_query);
+    rc = sqlite3_exec(db, sql_query, sql_select_callback, 0, &zErrMsg);
+    if( rc ){
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] Failed to update forwarding number: %s\n", sqlite3_errmsg(db));
+        sqlite3_free(zErrMsg);
+        return;
+    }
+}
+
+// Function to update call forwarding activation status for a client
+void update_activation_status(const char* clientNumber, int isActivated)
+{
+    char sql_query[256];
+    char *zErrMsg = 0;
+    int rc;
+
+    sprintf(sql_query, "UPDATE forwardinfo SET ");
+    sprintf(sql_query + strlen(sql_query), "isActivated=%d", isActivated);
+    sprintf(sql_query + strlen(sql_query), " WHERE clientNumber='%s';", clientNumber);
+    //printf("[DEBUG] Prepared String: %s\n", sql_query);
+    rc = sqlite3_exec(db, sql_query, sql_select_callback, 0, &zErrMsg);
+    if( rc ){
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] Failed to activate call forwarding: %s\n", sqlite3_errmsg(db));
+        sqlite3_free(zErrMsg);
+        return;
+    }
+}
+
+// Function to update forwarding type for a client
+void update_forwarding_type(const char* clientNumber, int forwardingType)
+{
+    char sql_query[256];
+    char *zErrMsg = 0;
+    int rc;
+
+    sprintf(sql_query, "UPDATE forwardinfo SET ");
+    sprintf(sql_query + strlen(sql_query), "forwardType=%d", forwardingType);
+    sprintf(sql_query + strlen(sql_query), " WHERE clientNumber='%s';", clientNumber);
+    //printf("[DEBUG] Prepared String: %s\n", sql_query);
+    rc = sqlite3_exec(db, sql_query, sql_select_callback, 0, &zErrMsg);
+    if( rc ){
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] Failed to update forwarding type: %s\n", sqlite3_errmsg(db));
+        sqlite3_free(zErrMsg);
+        return;
+    }
+}
+
 // Function to handle client requests
 void handle_client(int client_socket) {
     char buffer[1024] = {0};
@@ -186,36 +260,95 @@ void handle_client(int client_socket) {
     
     valread = read(client_socket, buffer, 1024);
     if (valread <= 0) {
-        fprintf(stderr, "Error reading from client.\n");
+        fprintf(stderr, "[ERROR] Error reading from client.\n");
         return;
     }
 
-    printf("Buffer: %s\n", buffer);
+    printf("[INFO] Buffer: %s\n", buffer);
     token_params = strtok(buffer, " ");
 
     // Process the received command
     if (strcmp(token_params, "ADD_LOGIN") == 0) {
-        printf("Request recieved to add login\n");
-
         // Example: add_login_details(db, "user1", "password1");
+        printf("[INFO] Request recieved to add login\n");
+        const char* userId = strtok(buffer, " ");
+        const char* password = strtok(buffer, " ");
+        add_login_details(userId, password);
+        
     } else if (strcmp(token_params, "ADD_USER") == 0) {
-        printf("Request recieved to add user\n");
+        printf("[INFO] Request recieved to add user\n");
         char* clientNumber = strtok(NULL, " ");
+        char* forwardingNumber = strtok(NULL, " ");
+        int isRegistered = atoi(strtok(NULL, " "));
+        int isActivated = atoi(strtok(NULL, " "));
+        int forwardType = 0;
+        char* forwTypeBuffer = strtok(NULL, " ");
+        //printf("DEBUG: forwType: %c %d\n", forwTypeBuffer[0], forwTypeBuffer[0]);
+        if (forwTypeBuffer[0] == 'U') 
+            forwardType = 1;
+        if (forwTypeBuffer[0] == 'N')
+            forwardType = 2;
+        if (forwTypeBuffer[0] == 'B')
+            forwardType = 3;
+
         // Example: add_user_data(db, 1, "1234567890", 1, 1, "Busy");
+        add_user_data(clientNumber, forwardingNumber, isRegistered, isActivated, forwardType);
+
     } else if (strcmp(token_params, "DELETE_LOGIN") == 0) {
-        printf("Request recieved to delete login\n");
         // Example: delete_login_details(db, "user1");
+        printf("[INFO] Request recieved to delete login\n");
+        char* userId = strtok(NULL, " ");
+        delete_login_details(userId);
+        
     } else if (strcmp(token_params, "DELETE_USER") == 0) {
-        printf("Request recieved to delete user\n");
+        printf("[INFO] Request recieved to delete user\n");
+        char* userId = strtok(NULL, " ");
+
         // Example: delete_user_data(db, 1);
+        delete_user_data(userId);
+        
     } else if (strcmp(token_params, "VIEW_LOGIN") == 0) {
-        printf("Request recieved to view login data\n");
+        printf("[INFO] Request recieved to view login data\n");
         view_auth_table();
     } else if (strcmp(token_params, "VIEW_USER") == 0) {
-        printf("Request recieved to view user forwarding data\n");
+        printf("[INFO] Request recieved to view user forwarding data\n");
         view_forwarding_table();
+    } else if (strcmp(token_params, "UPD_USER") == 0) {
+        printf("[INFO] Request recieved to update user forwarding data\n");
+        char* clientNumber = strtok(NULL, " ");
+        char* forwardingNumber = strtok(NULL, " ");
+        int isRegistered = atoi(strtok(NULL, " "));
+        int isActivated = atoi(strtok(NULL, " "));
+        int forwardType = 0;
+        char* forwTypeBuffer = strtok(NULL, " ");
+        //printf("DEBUG: forwType: %c %d\n", forwTypeBuffer[0], forwTypeBuffer[0]);
+        if (forwTypeBuffer[0] == 'O')
+            forwardType = -1;
+        if (forwTypeBuffer[0] == 'U') 
+            forwardType = 1;
+        if (forwTypeBuffer[0] == 'N')
+            forwardType = 2;
+        if (forwTypeBuffer[0] == 'B')
+            forwardType = 3;
+
+        if(strcmp(forwardingNumber, "NA"))
+        {
+            update_forwarding_number(clientNumber,forwardingNumber);
+            printf("[INFO] Updated forwarding number\n");
+        }
+        if(isActivated != -1)
+        {
+            update_activation_status(clientNumber,isActivated);
+            printf("[INFO] Updated forwarding activation status\n");
+        }
+        if(forwardType != -1)
+        {
+            update_forwarding_type(clientNumber, forwardType);
+            printf("[INFO] Updated forwarding type\n");
+        }
+
     } else {
-        fprintf(stderr, "Unknown command received from client: %s\n", buffer);
+        fprintf(stderr, "[WARN] Unknown command received from client: %s\n", buffer);
     }
 
     // while(token_params != NULL)
@@ -224,6 +357,8 @@ void handle_client(int client_socket) {
     // }
     
     // Respond back to the client if needed
-    // Example: send(client_socket, response_message, strlen(response_message), 0);
+    // Example: 
+    char* response_message="[SERVER] Task completed\n";
+    send(client_socket, response_message, strlen(response_message), 0);
 }
 

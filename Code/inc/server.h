@@ -19,10 +19,14 @@ extern void close_database();
 extern void add_login_details(const char*, const char* password);
 extern void add_user_data(const char*, const char*, int, int, int);
 extern void delete_login_details(const char*);
-extern void delete_user_data(int);
+extern void delete_user_data(const char*);
 
 extern void view_auth_table();
 extern void view_forwarding_table();
+
+extern void update_forwarding_number(const char*, const char*);
+extern void update_activation_status(const char*, int);
+extern void update_forwarding_type(const char*, int);
 
 extern void handle_client(int);
 

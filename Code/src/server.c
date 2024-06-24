@@ -39,7 +39,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
     
-    printf("Server listening on port %d...\n", PORT);
+    printf("[INFO] Server listening on port %d...\n", PORT);
     
     while (1) {
         // Accept incoming connection
