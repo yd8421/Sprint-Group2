@@ -1,3 +1,6 @@
+#ifndef __HEADER__
+#define __HEADER__
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,3 +24,5 @@ extern void delete_user_data(int);
 extern void view_all(const char* table_name);
 
 extern void handle_client(int);
+
+#endif

@@ -26,12 +26,13 @@ client:
 	$(CC) $(CFLAGS) $(BIN)/client $(OBJ)/client.o $(OBJ)/client_funct.o
 
 server:
-	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server.c -o $(OBJ)/server.o
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server.c $(SRC)/sqlite3.c $(SQFLAGS) $(LDLFLAGS)
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server_funct.c -o $(OBJ)/server_funct.o 
-	$(CC) $(SQFLAGS) $(CFLAGS) $(BIN)/server $(OBJ)/server.o $(OBJ)/server_funct.o $(OBJ)/sqlite3.o
+	$(CC) $(CFLAGS) $(BIN)/server ./server.o ./sqlite3.o $(SQFLAGS) $(LDLFLAGS) $(OBJ)/server_funct.o
+	mv *.o ./obj
 
 sqlite3:
-	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/sqlite3.c $(SQFLAGS) -o $(OBJ)/sqlite3.o $(LDLFLAGS)	
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/sqlite3.c $(SQFLAGS) -o $(OBJ)/sqlite3.o 
 		
 
 clean:
