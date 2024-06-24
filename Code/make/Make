@@ -10,6 +10,9 @@ CFLAGS = -Wall -g -o
 IFLAGS = -I $(INC)
 LDFLAGS = -c
 
+# Required flags for the SQLite: POSIX Threads (libpthread), Dynamic library (libdl)
+SQFLAGS = -lpthread -ldl -lm
+
 admin:
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/admin.c -o $(OBJ)/admin.o
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/admin_funct.c -o $(OBJ)/admin_funct.o 
