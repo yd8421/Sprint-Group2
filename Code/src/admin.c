@@ -22,8 +22,6 @@ int main()
         return 0;
     }
 
-    int choice = admin_menu();
-
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
     char command[1024] = {0};
@@ -51,6 +49,8 @@ int main()
     }
     
     printf("Connected to server on port %d\n", PORT);
+    
+    int choice = admin_menu();
 
     fill_command(command,choice);
     

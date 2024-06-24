@@ -39,11 +39,11 @@ int login()
 int admin_menu(void){
 	
 	int try = 4;
+	int choice;
+
 	while(try--){
 
 		system("clear");
-
-		int choice;
 
 		printf("******************************************\n");
 		printf("          Welcome to Admin Menu            \n");
@@ -95,7 +95,8 @@ void fill_command(char command[],int choice)
 			scanf("%d", &registered);
 			printf("Activate Service(0/1): ");
 			scanf("%d", &forward_activated);
-			printf("forward type(U/N/B): ");
+			myflush();
+			printf("forward type\nUnconditional - U\nNo reply - N\n Busy - B\n(U/N/B): ");
 			scanf("%c", &forwarding_type);
 			myflush();
 			strcpy(command, "ADD_USER");
@@ -103,20 +104,27 @@ void fill_command(char command[],int choice)
 			command[i++] = ' ';
 			
 			for(int j=0; j<10; j++){
-				command[i++] = clent_number[j];
+				command[i++] = client_number[j];
 			}
 			command[i++] = ' ';
 
-			for(int j=0; j<n; j++){
+			for(int j=0; j<10; j++){
 				command[i++] = forwarding_number[j];
 			}
 			command[i++] = ' ';
 
 			command[i++] = '0' + registered;
+			command[i++] = ' ';
+			
+			command[i++] = '0' + forward_activated;
+			command[i++] = ' ';
+
+			command[i++] = forwarding_type;
 
 			break;
 
-		case 3: 
+		case 3:
+
 			break;
 		case 4: 
 			break;
