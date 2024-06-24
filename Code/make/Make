@@ -11,24 +11,28 @@ IFLAGS = -I $(INC)
 LDFLAGS = -c
 
 # Required flags for the SQLite: POSIX Threads (libpthread), Dynamic library (libdl)
-SQFLAGS = -lpthread -ldl -lm
+SQFLAGS = -lpthread -lm -pthread
+LDLFLAGS = -ldl
 
 admin:
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/admin.c -o $(OBJ)/admin.o
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/admin_funct.c -o $(OBJ)/admin_funct.o 
-	$(CC) $(CFLAGS) $(BIN)/adm_test $(OBJ)/admin.o $(OBJ)/admin_funct.o
+	$(CC) $(CFLAGS) $(BIN)/admin $(OBJ)/admin.o $(OBJ)/admin_funct.o
 
 
 client:
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/client.c -o $(OBJ)/client.o
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/client_funct.c -o $(OBJ)/client_funct.o 
-	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/client.o $(OBJ)/client_funct.o
+	$(CC) $(CFLAGS) $(BIN)/client $(OBJ)/client.o $(OBJ)/client_funct.o
 
 server:
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server.c -o $(OBJ)/server.o
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/server_funct.c -o $(OBJ)/server_funct.o 
-	$(CC) $(CFLAGS) $(BIN)/test $(OBJ)/server.o $(OBJ)/server_funct.o
-	
+	$(CC) $(SQFLAGS) $(CFLAGS) $(BIN)/server $(OBJ)/server.o $(OBJ)/server_funct.o $(OBJ)/sqlite3.o
+
+sqlite3:
+	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/sqlite3.c $(SQFLAGS) -o $(OBJ)/sqlite3.o $(LDLFLAGS)	
+		
 
 clean:
 	rm $(OBJ)/*.o

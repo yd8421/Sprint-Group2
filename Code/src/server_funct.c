@@ -1,3 +1,8 @@
+#include<server.h>
+#include<sqlite3.h>
+
+sqlite3* db;
+
 // Function to handle SQLite errors
 void handle_error(sqlite3* db) {
     fprintf(stderr, "SQLite error: %s\n", sqlite3_errmsg(db));
