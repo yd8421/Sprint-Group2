@@ -54,12 +54,12 @@ void create_command(char command[], int ch){
 	if(ch == 0 || ch == 1){
 		printf("\nEnter forwarding number: ");
         	scanf(" %s", forwarding_number);
+        	myflush();
 	}
 	else{
 		strcpy(forwarding_number, "NA");
 	}
 
-        myflush();
         if(ch == 0){
 		printf("\nRegister/Unregister user(0/1): ");
         	scanf("%d", &registered);
@@ -111,7 +111,8 @@ void create_command(char command[], int ch){
         }
         command[i++] = ' ';
 
-	if(registered != -1)command[i++] = '0' + registered;
+	if(registered != -1)
+		command[i++] = '0' + registered;
 	else{ 
 		command[i++] = '-';
 		command[i++] = '1';
