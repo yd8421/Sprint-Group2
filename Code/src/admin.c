@@ -51,8 +51,12 @@ int main()
     printf("Connected to server on port %d\n", PORT);
     
     int choice = admin_menu();
+    if(choice == 5) return 0;
 
-    fill_command(command,choice);
+    if(fill_command(command,choice) == 0){
+	    close(sock);
+	    return 0;
+    }
     
     send(sock, command, strlen(command), 0);
     printf("Sent command: %s\n", command);

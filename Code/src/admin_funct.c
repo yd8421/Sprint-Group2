@@ -7,12 +7,8 @@ int admin_menu(void);
 int update_menu(void);
 void create_command(char[], int);
 
-void add(void);
-void delete(void);
-void update(void);
-void view(void);
 void myflush(void);
-void fill_command(char[],int);
+int fill_command(char[],int);
 
 void myflush(void){
 	while(getchar() != '\n');
@@ -100,12 +96,12 @@ void create_command(char command[], int ch){
 
         command[i++] = ' ';
 
-        for(int j=0; j<10; j++){
+        for(int j=0; j<strlen(client_number); j++){
 
                 command[i++] = client_number[j];
         }
         command[i++] = ' ';
-
+	
         for(int j=0; j<strlen(forwarding_number); j++){
                 command[i++] = forwarding_number[j];
         }
@@ -199,10 +195,11 @@ int update_menu(){
         return choice;
 }
 
-void fill_command(char command[],int choice)
+int fill_command(char command[],int choice)
 {
 
-	int ch;
+	int ch, admin_menu_choice;
+	char del_user[11];
 	switch(choice)
 	{
 		case 1: strcpy(command,"VIEW_USER");
@@ -213,12 +210,21 @@ void fill_command(char command[],int choice)
 
 		case 3: 
 			ch = update_menu();
+			if(ch == 5){
+				admin_menu_choice = admin_menu();
+				if(admin_menu_choice == 5)return 0;
+				break;
+			}
 			create_command(command, ch);
 			break;
 
-		case 4: 
+		case 4: printf("Enter client number to delete: ");
+			scanf("%s", del_user);
+			myflush();
+			strcpy(command, "DEL_USER "); 
 			break;
 	}
+	return 1;
 }
 
 
