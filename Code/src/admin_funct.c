@@ -149,7 +149,7 @@ int admin_menu(void){
 			printf("\nWrong input. You have %d tries left. Try Again", try+1);
 		}
 		printf("\nEnter your choice (1-5): ");
-
+		myflush();
 		scanf("%d", &choice);
 		myflush();
 
@@ -180,7 +180,7 @@ int update_menu(){
                 printf("\t5. Back to main menu\n");
                 printf("\n******************************************\n");
 
-                if(try<3){
+                if(try<2){
                         printf("\nWrong input. You have %d tries left. Try Again", try+1);
                 }
                 printf("\nEnter your choice (1-5): ");
@@ -208,15 +208,8 @@ int fill_command(char command[],int choice)
 		case 2: create_command(command, 0);
 			break;
 
-		case 3: 
-			ch = update_menu();
-			if(ch == 5){
-				admin_menu_choice = admin_menu();
-				if(admin_menu_choice == 5)return 0;
-				break;
-			}
-			create_command(command, ch);
-			break;
+		case 3: return 10; 
+
 
 		case 4: printf("Enter client number to delete: ");
 			scanf("%s", del_user);

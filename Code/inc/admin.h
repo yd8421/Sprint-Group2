@@ -7,6 +7,7 @@
 #define PORT 12345
 #define SERVER_ADDRESS "127.0.0.1"
 
+extern void myflush(void);
 extern int fill_command(char[], int);
 extern int login(void);
 extern int admin_menu(void);

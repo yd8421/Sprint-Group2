@@ -50,20 +50,35 @@ int main()
     
     printf("Connected to server on port %d\n", PORT);
     
-    int choice = admin_menu();
-    if(choice == 5) return 0;
 
-    if(fill_command(command,choice) == 0){
-	    close(sock);
-	    return 0;
-    }
+    while(1){
+    	int choice = admin_menu();
+    	if(choice == 5){
+	 	close(sock);
+	    	return 0;
+    	}
+	int ch = fill_command(command, choice);
+ 	if(ch == 0){
+		close(sock);
+	    	return 0;
+	}
+	
+	if(ch == 10){
+		continue;
+	}
+
+   	send(sock, command, strlen(command), 0);
+    	printf("Sent command: %s\n", command);
     
-    send(sock, command, strlen(command), 0);
-    printf("Sent command: %s\n", command);
-    
-    valread = read(sock, buffer, 1024);
-    if (valread > 0) {
-        printf("Server response: %s\n", buffer);
+    	valread = read(sock, buffer, 1024);
+    	if (valread > 0) {
+        	printf("Server response:\n\n%s\n", buffer);
+    	}
+
+	memset(command, '\0', sizeof(command));
+	printf("Press ENTER KEY to continue: ");
+	myflush();
+	
     }
 
     close(sock);
