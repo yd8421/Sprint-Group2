@@ -581,7 +581,7 @@ void update_forwarding_type(const char* clientNumber, int forwardingType)
 }
 
 // Function to handle client requests
-void handle_client(int client_socket, const char* logFileName) {
+int handle_client(int client_socket, const char* logFileName) {
     char buffer[1024] = {0};
     char logMsg[128];
     FILE* logger = fopen(logFileName, "a");
@@ -601,9 +601,14 @@ void handle_client(int client_socket, const char* logFileName) {
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
         fprintf(stderr, "[ERROR] Error reading from client\n");
         fclose(logger);
-        return;
+        return 0;
     }
 
+    if(strcmp(buffer, "EXIT") == 0)
+    {
+        send(client_socket, "EXIT", strlen("EXIT"), 0);
+        return 1;
+    }
     printf("[INFO] Buffer: %s\n", buffer);
     sprintf(logMsg, "[INFO] Buffer: %s\n", buffer);
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
@@ -800,4 +805,5 @@ void handle_client(int client_socket, const char* logFileName) {
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     fwrite(response_message, sizeof(char), strlen(response_message), logger);
     fclose(logger);
+    return 0;
 }

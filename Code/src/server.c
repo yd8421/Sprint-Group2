@@ -98,7 +98,8 @@ int main() {
         sprintf(logMsg, "[INFO] Handling incoming client communication\n");
         printf("[INFO] Handling incoming client communication\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
-        handle_client(new_socket, logFileName);
+        
+        while(handle_client(new_socket, logFileName)==0);
         
         // Close the socket after handling the client
         sprintf(logMsg, "[INFO] Closing the socket\n");

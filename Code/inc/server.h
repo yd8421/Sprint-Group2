@@ -35,6 +35,6 @@ extern void update_forwarding_number(const char*, const char*);
 extern void update_activation_status(const char*, int);
 extern void update_forwarding_type(const char*, int);
 
-extern void handle_client(int, const char*);
+extern int handle_client(int, const char*);
 
 #endif
