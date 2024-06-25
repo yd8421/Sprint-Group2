@@ -19,7 +19,7 @@ extern void login(char[]);
 extern void call(char[]);
 extern void myflush(void);
 extern int user_menu(void);
-extern void update_client_data(void);
+extern void create_update_cmd(char[], int);
 extern void save(char[]);
 
 #endif

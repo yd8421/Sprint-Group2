@@ -7,7 +7,7 @@ int main_menu(void);
 void call(char[]);
 void login(char[]);
 int user_menu(void);
-void update_client_data(void);
+void create_update_cmd(char[], int);
 void save(char[]);
 void send_recv_query(int, char[], char[]);
 
@@ -28,7 +28,8 @@ void send_recv_query(int client_fd, char command[], char buffer[]){
                         exit(EXIT_FAILURE);
         }
 
-               // ssize_t bytes_received;
+        ssize_t bytes_received;
+
         if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
                 perror("recv failed");
        		exit(EXIT_FAILURE);
@@ -42,7 +43,7 @@ void send_recv_query(int client_fd, char command[], char buffer[]){
         }
 }
 
-void login(command){
+void login(char command[]){
 	
 	char password[20];
 	int i=0;
@@ -135,6 +136,86 @@ int user_menu(){
                 else break;
         }
         return choice;
+
+}
+
+void create_update_cmd(char command[], int ch){
+	
+	char client_number[11];
+        char forwarding_number[11];
+        int registered=0;
+        int forward_activated=0;
+        char forwarding_type;
+        int i=0;
+
+	strcpy(client_number, user_no);
+
+        if( ch == 1){
+                printf("\nEnter forwarding number: ");
+                scanf(" %s", forwarding_number);
+                myflush();
+        }
+        else{
+                strcpy(forwarding_number, "NA");
+        }
+
+       	if(ch == 4){
+                registered = 0;
+        }
+        else{
+                registered = -1;
+        }
+
+        if(ch == 2){
+                printf("\nActivate Service(0/1): ");
+                scanf("%d", &forward_activated);
+                myflush();
+        }
+	else{
+                forward_activated = -1;
+        }
+
+        if(ch == 3){
+                printf("\nforward type\nUnconditional - U\nNo reply - N\nBusy - B\n(U/N/B): ");
+
+                scanf("%c", &forwarding_type);
+                myflush();
+        }
+        else{
+                forwarding_type = 'O';
+        }
+
+        strcpy(command, "UPD_USER");
+      	i += 8;
+	command[i++] = ' ';
+
+        for(int j=0; j<strlen(client_number); j++){
+
+                command[i++] = client_number[j];
+        }
+        command[i++] = ' ';
+
+	for(int j=0; j<strlen(forwarding_number); j++){
+                command[i++] = forwarding_number[j];
+        }
+        command[i++] = ' ';
+
+        if(registered != -1)
+                command[i++] = '0' + registered;
+        else{
+                command[i++] = '-';
+                command[i++] = '1';
+        }
+        command[i++] = ' ';
+
+        if(forward_activated != -1)command[i++] = '0' + forward_activated;
+        else{
+                command[i++] = '-';
+                command[i++] = '1';
+        }
+        command[i++] = ' ';
+
+        command[i++] = forwarding_type;
 
 }
 
@@ -240,6 +321,7 @@ void call(char command[]){
 	
 	printf("Enter the number to call: ");
 	scanf("%s", call_number);
+	myflush();
 
 	strcpy(command, "CFS_CODE ");
 	

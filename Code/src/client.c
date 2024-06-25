@@ -37,90 +37,117 @@ int main(){
     	}	
 
     	printf("Connected to server on %s:%d\n", SERVER_IP, PORT);
-	
-	choice = main_menu();
 
-	if(choice == 1){
-		call(command);
-		
-		char command_copy[40];
-		strcpy(command_copy, command);
+	while(1){	
+		choice = main_menu();
 
-	        char* call_no = strtok(command_copy, " ");
-		call_no = strtok(NULL, " ");
-		
-		if (send(client_fd, command, strlen(command), 0) < 0) {
-       			perror("send failed");
-        		exit(EXIT_FAILURE);
-    		}
-		
-		ssize_t bytes_received;
-		if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
-        		perror("recv failed");
-        		exit(EXIT_FAILURE);
-    		}
+		if(choice == 1){
+			call(command);
 
-    		if (bytes_received == 0) {
-        		printf("Server closed connection\n");
-    		} else {
-        		buffer[bytes_received] = '\0'; // Null-terminate the received data
-        		printf("Received response: %s\n", buffer);
-    		}
-		
-		if(strcmp(buffer, "NF\n") == 0){
-			system("clear");
-			printf("Calling number: %s\n\n", call_no);
-		}
-		else{
-			char* token = strtok(buffer, " ");
+			char command_copy[40];
+			strcpy(command_copy, command);
+
+	        	char* call_no = strtok(command_copy, " ");
 			call_no = strtok(NULL, " ");
-			int forward_type = atoi(strtok(NULL, " "));
+				
+			send_recv_query(client_fd, command, buffer);
 			
-			printf("Forwarding call to: %s\n", call_no);
-			
-			if(forward_type == 1){
-				printf("Call connected\n\n");
-			}
-			else if(forward_type == 2){
-				printf("The number you called is BUSY\n\n");
+			if(strcmp(buffer, "NF\n") == 0){
+		//		system("clear");
+				printf("Calling number: %s\n\n", call_no);
+		
 			}
 			else{
-				printf("The number is NOT RESPONDING\n\n");
-			}
+				char* token = strtok(buffer, " ");
+				call_no = strtok(NULL, " ");
+				int forward_type = atoi(strtok(NULL, " "));
 			
+				printf("Forwarding call to: %s\n", call_no);
+				
+				if(forward_type == 1){
+					printf("Call connected\n\n");
+				}
+				else if(forward_type == 2){
+					printf("The number you called is BUSY\n\n");
+				}
+				else{
+					printf("The number is NOT RESPONDING\n\n");
+				}
+			
+			}
 		}
-	}
-	else if(choice == 2){
+		else if(choice == 2){
 		
-		register_user_pass(command);
+			register_user_pass(command);
 		
-		send_recv_query(client_fd, command, buffer);
+			send_recv_query(client_fd, command, buffer);
 
+			memset(command, '\0', sizeof(command));
+			memset(buffer, '\0', sizeof(buffer));
+
+			register_user(command);
+	
+			send_recv_query(client_fd, command, buffer);
+
+		}
+		else if(choice == 3){
+			int ch;
+			int try = 3;
+			int f = 0;
+			while(try--){
+				login(command);
+		
+				send_recv_query(client_fd, command, buffer);
+
+				if(strcmp(buffer, "AUTH_SUCCESS")){
+					break;
+				}
+				else{
+					f = 1;
+					continue;
+				}
+			}
+
+			if(f){
+				printf("Authentication failed! Redirecting to menu\n");
+				sleep(1);
+				continue;
+			}
+
+
+			memset(command, '\0', sizeof(command));
+                	memset(buffer, '\0', sizeof(buffer));
+
+			
+			ch = user_menu();
+		
+			if(ch == 5){
+				continue;
+			}
+
+			if(ch == 6){
+			
+				send_recv_query(client_fd, "EXIT",  buffer);
+				close(client_fd);
+				return 0;
+			}
+		
+			create_update_cmd(command, ch);
+
+			send_recv_query(client_fd, command, buffer);
+
+		}
+		else{
+			send_recv_query(client_fd, "EXIT",  buffer);
+			close(client_fd);
+			return 0;
+		}
 		memset(command, '\0', sizeof(command));
 		memset(buffer, '\0', sizeof(buffer));
 
-		register_user(command);
-	
-		send_recv_query(client_fd, command, buffer);
+		printf("\nPress ENTER KEY to continue: ");
+		myflush();
 
 	}
-	else if(choice == 3){
-		int ch;
-		login(command);
-		
-		send_recv_query(client_fd, command, buffer);
-
-		if(strcmp(buffer, "AUTH_SUCCESS\n")){
-		//do something
-		}
-			
-		ch = user_menu();
-		
-	}
-	else{
-		return 0;
-	}
-	memset(command, '\0', sizeof(command));
-	memset(buffer, '\0', sizeof(buffer));
-
+	close(client_fd);
 }
