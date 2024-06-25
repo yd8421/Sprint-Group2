@@ -522,7 +522,7 @@ char* view_cfs_code(const char* clientNumber)
 }
 
 // Function to update forwarding number for a client
-void update_forwarding_number(const char* clientNumber, const char* forwardingNumber){
+int update_forwarding_number(const char* clientNumber, const char* forwardingNumber){
     char sql_query[256];
     char *zErrMsg = 0;
     int returnCode;
@@ -536,12 +536,13 @@ void update_forwarding_number(const char* clientNumber, const char* forwardingNu
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] Failed to update forwarding number: %s\n", sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
-        return;
+        return 1;
     }
+    return 0;
 }
 
 // Function to update call forwarding activation status for a client
-void update_activation_status(const char* clientNumber, int isActivated)
+int update_activation_status(const char* clientNumber, int isActivated)
 {
     char sql_query[256];
     char *zErrMsg = 0;
@@ -556,12 +557,13 @@ void update_activation_status(const char* clientNumber, int isActivated)
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] Failed to activate call forwarding: %s\n", sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
-        return;
+        return 1;
     }
+    return 0;
 }
 
 // Function to update forwarding type for a client
-void update_forwarding_type(const char* clientNumber, int forwardingType)
+int update_forwarding_type(const char* clientNumber, int forwardingType)
 {
     char sql_query[256];
     char *zErrMsg = 0;
@@ -576,8 +578,9 @@ void update_forwarding_type(const char* clientNumber, int forwardingType)
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] Failed to update forwarding type: %s\n", sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
-        return;
+        return 1;
     }
+    return 0;
 }
 
 // Function to handle client requests
@@ -770,45 +773,66 @@ int handle_client(int client_socket, const char* logFileName) {
 
         if(strcmp(forwardingNumber, "NA"))
         {
-            update_forwarding_number(clientNumber,forwardingNumber);
-            printf("[INFO] Updated forwarding number\n");
-            sprintf(response_message, "[SERVER] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
-            sprintf(logMsg, "[INFO] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
-            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            if(update_forwarding_number(clientNumber,forwardingNumber)){
+                printf("[ERROR] Failed to update forwarding number for '%s'\n", clientNumber);
+                sprintf(response_message, "[SERVER] Failed to update forwarding number for '%s'\n", clientNumber);
+                sprintf(logMsg, "[ERROR] Failed to update forwarding number for '%s'\n", clientNumber);
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
+            else{
+                printf("[INFO] Updated forwarding number\n");
+                sprintf(response_message, "[SERVER] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
+                sprintf(logMsg, "[INFO] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
 
         }
         if(isActivated != -1)
         {
-            update_activation_status(clientNumber,isActivated);
-            printf("[INFO] Updated forwarding activation status\n");
-            sprintf(response_message + strlen(response_message), "[SERVER] Activation status for '%s' has been updated to '%s'\n", clientNumber, isActivated ? "ACTIVE" : "NOT ACTIVE");
-            sprintf(logMsg, "[INFO] Activation status for '%s' has been updated to '%s'\n", clientNumber, isActivated ? "ACTIVE" : "NOT ACTIVE");
-            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            if(update_activation_status(clientNumber,isActivated)){
+                printf("[ERROR] Failed to update forwarding activation status for '%s'\n", clientNumber);
+                sprintf(response_message + strlen(response_message), "[SERVER] Failed to update forwarding activation status for '%s'\n", clientNumber);
+                sprintf(logMsg, "[ERROR] Failed to update forwarding activation status for '%s'\n", clientNumber);
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
+            else {
+                printf("[INFO] Updated forwarding activation status\n");
+                sprintf(response_message + strlen(response_message), "[SERVER] Activation status for '%s' has been updated to '%s'\n", clientNumber, isActivated ? "ACTIVE" : "NOT ACTIVE");
+                sprintf(logMsg, "[INFO] Activation status for '%s' has been updated to '%s'\n", clientNumber, isActivated ? "ACTIVE" : "NOT ACTIVE");
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
 
         }
         if(forwardType != -1)
         {
-            update_forwarding_type(clientNumber, forwardType);
-            printf("[INFO] Updated forwarding type\n");
-            sprintf(logMsg, "[INFO] Updated forwarding type\n");
-            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
-            
-            sprintf(response_message + strlen(response_message), "[SERVER] Forwarding type for '%s' has been updated to ", clientNumber);
-            if (forwardType == 1) {
-                sprintf(response_message + strlen(response_message), "'Unconditional'\n");
-                sprintf(logMsg, "[INFO] Forward Type: Unconditional\n");
+            if(update_forwarding_type(clientNumber, forwardType)){
+                printf("[ERROR] Failed to update forwarding type for '%s'\n", clientNumber);
+                sprintf(response_message + strlen(response_message), "[SERVER] Failed to update forwarding type for '%s'\n", clientNumber);
+                sprintf(logMsg, "[ERROR] Failed to update forwarding type for '%s'\n", clientNumber);
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
+            else {        
+                printf("[INFO] Updated forwarding type\n");
+                sprintf(logMsg, "[INFO] Updated forwarding type\n");
                 fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
                 
-            }
-            if (forwardType == 2) {
-                sprintf(response_message + strlen(response_message), "'No Reply'\n");
-                sprintf(logMsg, "[INFO] Forward Type: No Reply\n");
-                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
-            }
-            if (forwardType == 3) {
-                sprintf(response_message + strlen(response_message), "'Busy'\n");
-                sprintf(logMsg, "[INFO] Forward Type: Busy\n");
-                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+                sprintf(response_message + strlen(response_message), "[SERVER] Forwarding type for '%s' has been updated to ", clientNumber);
+                if (forwardType == 1) {
+                    sprintf(response_message + strlen(response_message), "'Unconditional'\n");
+                    sprintf(logMsg, "[INFO] Forward Type: Unconditional\n");
+                    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+                    
+                }
+                if (forwardType == 2) {
+                    sprintf(response_message + strlen(response_message), "'No Reply'\n");
+                    sprintf(logMsg, "[INFO] Forward Type: No Reply\n");
+                    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+                }
+                if (forwardType == 3) {
+                    sprintf(response_message + strlen(response_message), "'Busy'\n");
+                    sprintf(logMsg, "[INFO] Forward Type: Busy\n");
+                    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+                }
             }
         }
 
