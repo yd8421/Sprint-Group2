@@ -411,7 +411,7 @@ char* view_cfs_code(const char* clientNumber)
     if(statusFlag != 2)
     {
         printf("[INFO] Call will be connected to %s\n", clientNumber);
-        sprintf(responseData + strlen(responseData), "NF %s\n", clientNumber);
+        sprintf(responseData + strlen(responseData), "NF\n");
         return responseData;
     }
 
@@ -435,7 +435,7 @@ char* view_cfs_code(const char* clientNumber)
     case 0: printf("[INFO] Forward Type: Not Set\n");
             printf("[INFO] Call will be connected to %s\n", clientNumber);
 
-            sprintf(responseData + strlen(responseData), "NF %s\n", clientNumber);
+            sprintf(responseData + strlen(responseData), "NF\n");
             return responseData;
             break;
     case 1: printf("[INFO] Forward Type: Unconditional\n");
