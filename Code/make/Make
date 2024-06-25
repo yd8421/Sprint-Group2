@@ -38,4 +38,5 @@ sqlite3:
 clean:
 	rm $(OBJ)/*.o
 	rm $(BIN)/*
+	rm *.txt
 

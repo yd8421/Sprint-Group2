@@ -1,8 +1,0 @@
-[INFO] Starting server
-[INFO] Time: 2024-06-25 10:19:51
-
-[INFO] Opening database
-[INFO] Server listening on port 12345...
-[ERROR] Error reading from client
-[INFO] Handling incoming client communication
-[INFO] Closing the socket
