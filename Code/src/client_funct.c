@@ -5,10 +5,11 @@ void register_user_pass(char[]);
 void myflush(void);
 int main_menu(void);
 void call(char[]);
-int login(void);
+void login(char[]);
 int user_menu(void);
 void update_client_data(void);
 void save(char[]);
+void send_recv_query(int, char[], char[]);
 
 char user_no[11];
 
@@ -21,7 +22,50 @@ void save(char userNo[]){
 	strcpy(user_no, userNo);
 }
 
-int login(){
+void send_recv_query(int client_fd, char command[], char buffer[]){
+	if (send(client_fd, command, strlen(command), 0) < 0) {
+                        perror("send failed");
+                        exit(EXIT_FAILURE);
+        }
+
+               // ssize_t bytes_received;
+        if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
+                perror("recv failed");
+       		exit(EXIT_FAILURE);
+        }
+
+        if (bytes_received == 0) {
+        	printf("Server closed connection\n");
+        } else {
+                buffer[bytes_received] = '\0'; // Null-terminate the received data
+                printf("Received response: %s\n", buffer);
+        }
+}
+
+void login(command){
+	
+	char password[20];
+	int i=0;
+	
+	system("clear");
+
+	printf("Your userID: %s", user_no);
+	printf("\nEnter your password: ");
+        scanf("%s", password);
+	myflush();
+	
+	strcpy(command, "AUTH_USER");
+	i+=9;
+	command[i++] = ' ';
+
+	for(int j=0; j<strlen(user_no); j++){
+		command[i++] = user_no[j];
+	}
+	command[i++] = ' ';
+
+	for(int j=0; j<strlen(password); j++){
+		command[i++] = password[j];
+	}	
 }
 
 int main_menu(void){
@@ -59,6 +103,39 @@ int main_menu(void){
 }
 
 int user_menu(){
+	int choice;
+        int try = 3;
+
+        while(try--){
+
+                system("clear");
+
+                printf("******************************************\n");
+                printf("          Welcome to User Menu            \n");
+                printf("******************************************\n\n");
+                printf("\t1. Change forwarding number\n");
+                printf("\t2. Activate/Deactivate forwarding service\n");
+                printf("\t3. Change activation type\n");
+                printf("\t4. Unregister from the service\n");
+		printf("\t5. Logout\n");
+		printf("\t6. Exit\n");
+                printf("\n******************************************\n");
+
+                if(try<2){
+                        printf("\nWrong input. You have %d tries left. Try Again", try+1);
+                }
+                printf("\nEnter your choice (1-6): ");
+
+                scanf("%d", &choice);
+                myflush();
+
+                if(choice < 1 || choice > 6){
+                        continue;
+                }
+                else break;
+        }
+        return choice;
+
 }
 
 void register_user_pass(char command[]){

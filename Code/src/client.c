@@ -94,51 +94,28 @@ int main(){
 		
 		register_user_pass(command);
 		
-		if (send(client_fd, command, strlen(command), 0) < 0) {
-                        perror("send failed");
-                        exit(EXIT_FAILURE);
-                }
+		send_recv_query(client_fd, command, buffer);
 
-                ssize_t bytes_received;
-                if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
-                        perror("recv failed");
-                        exit(EXIT_FAILURE);
-                }
-
-                if (bytes_received == 0) {
-                        printf("Server closed connection\n");
-                } else {
-                        buffer[bytes_received] = '\0'; // Null-terminate the received data
-                        printf("Received response: %s\n", buffer);
-                }
-		
 		memset(command, '\0', sizeof(command));
-		
+		memset(buffer, '\0', sizeof(buffer));
+
 		register_user(command);
+	
+		send_recv_query(client_fd, command, buffer);
 
-		if (send(client_fd, command, strlen(command), 0) < 0) {
-                        perror("send failed");
-                        exit(EXIT_FAILURE);
-                }
-
-               // ssize_t bytes_received;
-                if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
-                        perror("recv failed");
-                        exit(EXIT_FAILURE);
-                }
-
-                if (bytes_received == 0) {
-                        printf("Server closed connection\n");
-                } else {
-                        buffer[bytes_received] = '\0'; // Null-terminate the received data
-                        printf("Received response: %s\n", buffer);
-                }
 	}
 	else if(choice == 3){
 		int ch;
-		if(login() == 1){
-			ch = user_menu();
+		login(command);
+		
+		send_recv_query(client_fd, command, buffer);
+
+		if(strcmp(buffer, "AUTH_SUCCESS\n")){
+		//do something
 		}
+			
+		ch = user_menu();
+		
 	}
 	else{
 		return 0;
