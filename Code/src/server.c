@@ -16,6 +16,19 @@ int main() {
 
     // Open the log file for the server
     FILE* logger = fopen(logFileName, "a");
+    
+    system("clear");
+
+    // Special ASCII Art for the server program
+    // From: https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=ForwardIt
+    printf("                                                                       \n");
+    printf("███████╗ ██████╗ ██████╗ ██╗    ██╗ █████╗ ██████╗ ██████╗ ██╗████████╗\n");
+    printf("██╔════╝██╔═══██╗██╔══██╗██║    ██║██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝\n");
+    printf("█████╗  ██║   ██║██████╔╝██║ █╗ ██║███████║██████╔╝██║  ██║██║   ██║   \n");
+    printf("██╔══╝  ██║   ██║██╔══██╗██║███╗██║██╔══██║██╔══██╗██║  ██║██║   ██║   \n");
+    printf("██║     ╚██████╔╝██║  ██║╚███╔███╔╝██║  ██║██║  ██║██████╔╝██║   ██║   \n");
+    printf("╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝   ╚═╝   \n");
+    printf("                                        Call Forwarding System - Server\n");
 
     sprintf(logMsg, "[INFO] Starting server\n");
     printf("[INFO] Starting server\n");
