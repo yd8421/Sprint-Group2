@@ -76,9 +76,10 @@ int main()
     	}
 
 	memset(command, '\0', sizeof(command));
-	printf("Press ENTER KEY to continue: ");
+	char buf;
 	myflush();
-	
+	printf("\nPress ENTER KEY to continue: ");
+    	myflush();
     }
 
     close(sock);

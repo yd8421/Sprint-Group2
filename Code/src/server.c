@@ -52,9 +52,10 @@ int main() {
         handle_client(new_socket);
         
         // Close the socket after handling the client
-        close(new_socket);
+        //close(new_socket);
     }
     
+    close(new_socket);
     close(server_fd);
     close_database(); // Close SQLite database
     return 0;

@@ -70,7 +70,6 @@ void create_command(char command[], int ch){
         if(ch == 0 || ch == 3){
 		printf("\nActivate Service(0/1): ");
         	scanf("%d", &forward_activated);
-        	myflush();
 	}
 	else{
 		forward_activated = -1;
@@ -78,8 +77,8 @@ void create_command(char command[], int ch){
 
         if(ch == 2 || ch == 0){
 		printf("\nforward type\nUnconditional - U\nNo reply - N\nBusy - B\n(U/N/B): ");
+		myflush();
         	scanf("%c", &forwarding_type);
-       		myflush();
 	}
 	else{
 		forwarding_type = 'O';
@@ -149,9 +148,8 @@ int admin_menu(void){
 			printf("\nWrong input. You have %d tries left. Try Again", try+1);
 		}
 		printf("\nEnter your choice (1-5): ");
-		myflush();
+		
 		scanf("%d", &choice);
-		myflush();
 
 		if(choice < 1 || choice > 5)continue;
 		else break;
@@ -186,7 +184,6 @@ int update_menu(){
                 printf("\nEnter your choice (1-5): ");
 
                 scanf("%d", &choice);
-                myflush();
 
                 if(choice < 1 || choice > 5)continue;
                 else break;
@@ -208,41 +205,22 @@ int fill_command(char command[],int choice)
 		case 2: create_command(command, 0);
 			break;
 
-		case 3: return 10; 
-
+		case 3: ch = update_menu();
+		        if(ch == 5)return 0;
+			create_command(command, ch);
+			break;	
 
 		case 4: printf("Enter client number to delete: ");
 			scanf("%s", del_user);
 			myflush();
-			strcpy(command, "DEL_USER "); 
+			strcpy(command, "DEL_USER ");
+		       	for(int i=0; i<strlen(del_user); i++){
+				command[i+9] = del_user[i];	
+			}
 			break;
+
+		case 5: return 10;
 	}
 	return 1;
-}
-
-
-
-
-
-
-
-void add(void)
-{
-
-}
-
-void delete(void)
-{
-
-}
-
-void update(void)
-{
-
-}
-
-void view(void)
-{
-
 }
 
