@@ -90,7 +90,7 @@ char* add_login_details(const char* userId, const char* password)
   if( returnCode == SQLITE_CONSTRAINT){
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] User '%s' is already registered to the CFS\n", userId);
-        sprintf(responseData, "[ERROR] User '%s' is already registered to the CFS\n", userId);
+        sprintf(responseData, "[SERVER] User '%s' is already registered to the CFS\n", userId);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
@@ -98,7 +98,7 @@ char* add_login_details(const char* userId, const char* password)
     if ( returnCode ) {
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] Error occured while adding user '%s'\n", userId);
-        sprintf(responseData, "[ERROR] Error occured while adding user '%s'\n", userId);
+        sprintf(responseData, "[SERVER] Error occured while adding user '%s'\n", userId);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
@@ -106,7 +106,7 @@ char* add_login_details(const char* userId, const char* password)
     else {
         // Message: Client info has been added to the database
         printf("[INFO] User login info '%s' has been added to the database\n", userId);
-        sprintf(responseData, "[INFO] User login info '%s' has been added to the database\n", userId);
+        sprintf(responseData, "[SERVER] User login info '%s' has been added to the database\n", userId);
         return responseData;
     }
 }
@@ -129,7 +129,7 @@ char* add_user_data(const char* clientNumber, const char* forwardingNumber, int 
     if( returnCode == SQLITE_CONSTRAINT){
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] User '%s' already exist!\n", clientNumber);
-        sprintf(responseData, "[ERROR] User '%s' already exist!\n", clientNumber);
+        sprintf(responseData, "[SERVER] User '%s' already exist!\n", clientNumber);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
@@ -137,7 +137,7 @@ char* add_user_data(const char* clientNumber, const char* forwardingNumber, int 
     if ( returnCode ) {
         // Log this section under ERROR
         fprintf(stderr, "[ERROR] Error occured while adding user '%s'\n", clientNumber);
-        sprintf(responseData, "[ERROR] Error occured while adding user '%s'\n", clientNumber);
+        sprintf(responseData, "[SERVER] Error occured while adding user '%s'\n", clientNumber);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
@@ -145,7 +145,7 @@ char* add_user_data(const char* clientNumber, const char* forwardingNumber, int 
     else {
         // Message: Client info has been added to the database
         printf("[INFO] User info '%s' has been added to the database\n", clientNumber);
-        sprintf(responseData, "[INFO] User info '%s' has been added to the database\n", clientNumber);
+        sprintf(responseData, "[SERVER] User info '%s' has been added to the database\n", clientNumber);
         return responseData;
     }
 }
@@ -635,8 +635,8 @@ int handle_client(int client_socket, const char* logFileName) {
         sprintf(logMsg, "[INFO] Request recieved to add login\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
-        const char* userId = strtok(buffer, " ");
-        const char* password = strtok(buffer, " ");
+        const char* userId = strtok(NULL, " ");
+        const char* password = strtok(NULL, " ");
         
         strcpy(response_message, add_login_details(userId, password));
         
