@@ -619,6 +619,7 @@ int handle_client(int client_socket, const char* logFileName) {
     // DEL_USER     - Delete the user details (login + user) from the CFS system
     // VIEW_LOGIN   - View the auth table for all the users in the CFS system
     // VIEW_USER    - View the forwarding table of the CFS system
+    // AUTH_USER    - For client: Validate the client based on it's number and the obtained password
     // CFS_STATUS   - Check the call forwarding status for a client number
     // CFS_CODE     - For client: Check the call forwarding status for a client number to simulate a phone call
     // UPD_USER     - Update forwarding details for the client number in the CFS system
@@ -627,6 +628,7 @@ int handle_client(int client_socket, const char* logFileName) {
     token_params = strtok(buffer, " ");
 
     // Process the received command
+    // ADD_LOGIN    - Add login info for the client number to access CFS system
     if (strcmp(token_params, "ADD_LOGIN") == 0) {
         // Example: add_login_details(g_db, "user1", "password1");
         printf("[INFO] Request recieved to add login\n");
@@ -638,7 +640,10 @@ int handle_client(int client_socket, const char* logFileName) {
         
         strcpy(response_message, add_login_details(userId, password));
         
-    } else if (strcmp(token_params, "ADD_USER") == 0) {
+    } 
+
+    // ADD_USER     - Add user info for the client number to the CFS system
+    else if (strcmp(token_params, "ADD_USER") == 0) {
         char* clientNumber = strtok(NULL, " ");
         char* forwardingNumber = strtok(NULL, " ");
         int isRegistered = atoi(strtok(NULL, " "));
@@ -660,7 +665,10 @@ int handle_client(int client_socket, const char* logFileName) {
 
         strcpy(response_message, add_user_data(clientNumber, forwardingNumber, isRegistered, isActivated, forwardType));
 
-    }  else if (strcmp(token_params, "DEL_USER") == 0) {
+    }
+    
+    // DEL_USER     - Delete the user details (login + user) from the CFS system
+    else if (strcmp(token_params, "DEL_USER") == 0) {
         printf("[INFO] Request recieved to delete user info\n");
         sprintf(logMsg, "[INFO] Request recieved to delete user info\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
@@ -685,19 +693,28 @@ int handle_client(int client_socket, const char* logFileName) {
             sprintf(response_message, "[SERVER] User details for '%s' has been deleted\n", userId);
         }
         
-    } else if (strcmp(token_params, "VIEW_LOGIN") == 0) {
+    } 
+    
+    // VIEW_LOGIN   - View the auth table for all the users in the CFS system
+    else if (strcmp(token_params, "VIEW_LOGIN") == 0) {
         printf("[INFO] Request recieved to view login data\n");
         sprintf(logMsg, "[INFO] Request recieved to view login data\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         view_auth_table();
-    } else if (strcmp(token_params, "VIEW_USER") == 0) {
+    } 
+    
+    // VIEW_USER    - View the forwarding table of the CFS system
+    else if (strcmp(token_params, "VIEW_USER") == 0) {
         printf("[INFO] Request recieved to view user forwarding data\n");
         sprintf(logMsg, "[INFO] Request recieved to view user forwarding data\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         strcpy(response_message, view_forwarding_table());
-    } else if (strcmp(token_params, "AUTH_USER") == 0) {
+    } 
+    
+    // AUTH_USER    - For client: Validate the client based on it's number and the obtained password
+    else if (strcmp(token_params, "AUTH_USER") == 0) {
         char* clientNumber = strtok(NULL, " ");
         char* password = strtok(NULL, " ");
         printf("[INFO] Request recieved to authenticate user\n");
@@ -705,7 +722,10 @@ int handle_client(int client_socket, const char* logFileName) {
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         strcpy(response_message, validate_auth_info(clientNumber, password));
-    } else if (strcmp(token_params, "CFS_STATUS") == 0) {
+    } 
+    
+    // CFS_STATUS   - Check the call forwarding status for a client number
+    else if (strcmp(token_params, "CFS_STATUS") == 0) {
         char* clientNumber = strtok(NULL, " ");
         printf("[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);
         sprintf(logMsg, "[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);
@@ -713,7 +733,10 @@ int handle_client(int client_socket, const char* logFileName) {
 
         strcpy(response_message, view_cfs_status(clientNumber));
 
-    } else if (strcmp(token_params, "CFS_CODE") == 0) {
+    } 
+    
+    // CFS_CODE     - For client: Check the call forwarding status for a client number to simulate a phone call
+    else if (strcmp(token_params, "CFS_CODE") == 0) {
         char* clientNumber = strtok(NULL, " ");
         printf("[INFO] Request recieved to retrieve code for user forwarding data of '%s'\n", clientNumber);
         sprintf(logMsg, "[INFO] Request recieved to retrieve code for user forwarding data of '%s'\n", clientNumber);
@@ -721,7 +744,10 @@ int handle_client(int client_socket, const char* logFileName) {
 
         strcpy(response_message, view_cfs_code(clientNumber));
 
-    } else if (strcmp(token_params, "UPD_USER") == 0) {
+    } 
+    
+    // UPD_USER     - Update forwarding details for the client number in the CFS system
+    else if (strcmp(token_params, "UPD_USER") == 0) {
         printf("[INFO] Request recieved to update user forwarding data\n");
         sprintf(logMsg, "[INFO] Request recieved to update user forwarding data\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
@@ -786,11 +812,13 @@ int handle_client(int client_socket, const char* logFileName) {
             }
         }
 
-    } else {
+    } 
+    
+    // <unknown-req> - else condition: for unknown commmands from the client/admin program
+    else {
         fprintf(stderr, "[WARN] Unknown command received from client: %s\n", buffer);
         sprintf(logMsg, "[WARN] Unknown command received from client: %s\n", buffer);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
-                
     }
 
     // while(token_params != NULL)
