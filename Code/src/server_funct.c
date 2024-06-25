@@ -244,6 +244,43 @@ char* view_forwarding_table() {
     return response_data;
 }
 
+char* validate_auth_info(const char* clientNumber, const char* password)
+{
+    char* responseData = (char*)malloc(RESPONSE_SIZE * sizeof(char));
+    char sql_query[256];
+    char resp_password[25];
+    char *errMsg = 0;
+    int returnCode;
+
+    sqlite3_stmt *res;
+
+    sprintf(sql_query, "SELECT passkey FROM authinfo");
+    sprintf(sql_query + strlen(sql_query), " WHERE clientNumber='%s';", clientNumber);
+
+    //printf("[DEBUG] Prepared String: %s\n", sql_query);
+    if (sqlite3_prepare_v2(g_db, sql_query, -1, &res, NULL) != SQLITE_OK) {
+        printf("[ERROR] Can't validate login data: %s\n", sqlite3_errmsg(g_db));
+        sprintf(responseData, "AUTH_FAILURE\n");
+        sqlite3_free(errMsg);
+        return responseData;
+    }
+
+    while (sqlite3_step(res) == SQLITE_ROW) {
+        strcpy(resp_password, sqlite3_column_text(res, 0));
+    }
+
+    if(strcmp(password, resp_password) == 0){
+        printf("[INFO] User '%s' had been authenticated\n", clientNumber);
+        sprintf(responseData, "AUTH_SUCCESS\n");
+        return responseData;
+    }
+    else{
+        printf("[WARN] User '%s' has entered an invalid password.\n", clientNumber);
+        sprintf(responseData, "AUTH_INV\n");
+        return responseData;
+    }
+}
+
 // Function to view the call forwarding record of a particular client
 char* view_cfs_status(const char* clientNumber)
 {
@@ -628,6 +665,14 @@ void handle_client(int client_socket, const char* logFileName) {
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         strcpy(response_message, view_forwarding_table());
+    } else if (strcmp(token_params, "AUTH_USER") == 0) {
+        char* clientNumber = strtok(NULL, " ");
+        char* password = strtok(NULL, " ");
+        printf("[INFO] Request recieved to authenticate user\n");
+        sprintf(logMsg, "[INFO] Request recieved to authenticate user\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
+        strcpy(response_message, validate_auth_info(clientNumber, password));
     } else if (strcmp(token_params, "CFS_STATUS") == 0) {
         char* clientNumber = strtok(NULL, " ");
         printf("[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);

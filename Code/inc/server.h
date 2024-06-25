@@ -27,6 +27,7 @@ extern void delete_user_data(const char*);
 
 extern char* view_auth_table();
 extern char* view_forwarding_table();
+extern char* validate_auth_info(const char*, const char*);
 extern char* view_cfs_status(const char*);
 extern char* view_cfs_code(const char*);
 
