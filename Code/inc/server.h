@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <sqlite3.h>
@@ -12,6 +13,8 @@
 #define PORT 12345
 #define MAX_CLIENTS 5
 #define RESPONSE_SIZE 8192
+
+extern char* get_current_time();
 
 extern void handle_error(sqlite3*);
 extern void open_database();
@@ -31,6 +34,6 @@ extern void update_forwarding_number(const char*, const char*);
 extern void update_activation_status(const char*, int);
 extern void update_forwarding_type(const char*, int);
 
-extern void handle_client(int);
+extern void handle_client(int, const char*);
 
 #endif
