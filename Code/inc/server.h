@@ -20,13 +20,14 @@ extern void handle_error(sqlite3*);
 extern void open_database();
 extern void close_database();
 
-extern void add_login_details(const char*, const char* password);
-extern void add_user_data(const char*, const char*, int, int, int);
+extern char* add_login_details(const char*, const char* password);
+extern char* add_user_data(const char*, const char*, int, int, int);
 extern void delete_login_details(const char*);
 extern void delete_user_data(const char*);
 
 extern char* view_auth_table();
 extern char* view_forwarding_table();
+extern char* validate_auth_info(const char*, const char*);
 extern char* view_cfs_status(const char*);
 extern char* view_cfs_code(const char*);
 
