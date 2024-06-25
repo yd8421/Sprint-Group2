@@ -1,6 +1,7 @@
 #include<client.h>
 
 void register_user(char[]);
+void register_user_pass(char[]);
 void myflush(void);
 int main_menu(void);
 void call(char[]);
@@ -60,6 +61,49 @@ int main_menu(void){
 int user_menu(){
 }
 
+void register_user_pass(char command[]){
+	
+	int f = 0;
+	int i = 0;
+	char password[20];
+	
+	while(1){
+		char password2[20];
+		
+		system("clear");
+
+		if(f)printf("Your password didn't match. Try Again:\n");
+		printf("\nYour userID: %s", user_no);
+		printf("\nEnter Password: ");
+		scanf("%s", password);
+		myflush();
+		printf("Re-Enter password: ");
+		scanf("%s", password2);
+		myflush();
+
+		if(strcmp(password, password2) == 0){
+			break;
+		}
+		else{
+			f = 1;
+		}
+	}
+
+	strcpy(command, "ADD_LOGIN");
+	i+=9;
+	command[i++] = ' ';
+	
+	for(int j=0; j<strlen(user_no); j++){
+		command[i++] = user_no[j];
+	}
+	command[i++] = ' ';
+
+	for(int j=0; j<strlen(password); j++){
+		command[i++] = password[j];
+	}
+	
+}
+
 void register_user(char command[]){
 	
 	char client_number[11];
@@ -69,9 +113,8 @@ void register_user(char command[]){
         char forwarding_type;
         int i=0;
 
-        printf("\nEnter client number: ");
-        scanf("%s", client_number);
-        myflush();
+        printf("\nYour userID:  %s", user_no);
+	strcpy(client_number, user_no);
 
       	printf("\nEnter forwarding number: ");
         scanf(" %s", forwarding_number);

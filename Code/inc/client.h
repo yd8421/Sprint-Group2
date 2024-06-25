@@ -13,6 +13,7 @@
 
 extern int main_menu();
 extern void register_user(char[]);
+extern void register_user_pass(char[]);
 extern int login();
 extern void call(char[]);
 extern void myflush(void);

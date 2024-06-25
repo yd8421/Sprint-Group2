@@ -53,12 +53,20 @@ int main()
 
     while(1){
     	int choice = admin_menu();
-    	if(choice == 5){
-	 	close(sock);
+    	myflush();
+	if(choice == 5){
+		send(sock, "EXIT", 4, 0);
+		valread = read(sock, buffer, 1024);
+	 	
+		close(sock);
 	    	return 0;
     	}
 	int ch = fill_command(command, choice);
+
  	if(ch == 0){
+		send(sock, "EXIT", 4, 0);
+		valread = read(sock, buffer, 1024);
+		
 		close(sock);
 	    	return 0;
 	}
@@ -68,16 +76,16 @@ int main()
 	}
 
    	send(sock, command, strlen(command), 0);
-    	printf("Sent command: %s\n", command);
-    
-    	valread = read(sock, buffer, 1024);
+    	printf("Sent command: %s\n\n", command);
+    	
+	valread = read(sock, buffer, 1024);
     	if (valread > 0) {
-        	printf("Server response:\n\n%s\n", buffer);
+        	printf("Server response: %s\n\n", buffer);
     	}
 
 	memset(command, '\0', sizeof(command));
-	char buf;
-	myflush();
+	memset(buffer, '\0', sizeof(buffer));
+
 	printf("\nPress ENTER KEY to continue: ");
     	myflush();
     }

@@ -59,6 +59,7 @@ void create_command(char command[], int ch){
         if(ch == 0){
 		printf("\nRegister/Unregister user(0/1): ");
         	scanf("%d", &registered);
+		myflush();
 	}
 	else if(ch == 4){
 		registered = 0;
@@ -70,6 +71,7 @@ void create_command(char command[], int ch){
         if(ch == 0 || ch == 3){
 		printf("\nActivate Service(0/1): ");
         	scanf("%d", &forward_activated);
+		myflush();
 	}
 	else{
 		forward_activated = -1;
@@ -77,8 +79,9 @@ void create_command(char command[], int ch){
 
         if(ch == 2 || ch == 0){
 		printf("\nforward type\nUnconditional - U\nNo reply - N\nBusy - B\n(U/N/B): ");
-		myflush();
+
         	scanf("%c", &forwarding_type);
+		myflush();
 	}
 	else{
 		forwarding_type = 'O';

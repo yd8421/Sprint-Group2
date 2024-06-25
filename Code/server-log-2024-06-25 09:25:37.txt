@@ -1,0 +1,32 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-25 09:25:37
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: ADD_LOGIN 2000133 pass@123
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[INFO] User login info 'ADD_LOGIN' has been added to the database
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: ADD_LOGIN 5000 20001
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[ERROR] User 'ADD_LOGIN' is already registered to the CFS
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: VIEW_USER
+[INFO] Request recieved to view user forwarding data
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

@@ -91,6 +91,29 @@ int main(){
 		}
 	}
 	else if(choice == 2){
+		
+		register_user_pass(command);
+		
+		if (send(client_fd, command, strlen(command), 0) < 0) {
+                        perror("send failed");
+                        exit(EXIT_FAILURE);
+                }
+
+                ssize_t bytes_received;
+                if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
+                        perror("recv failed");
+                        exit(EXIT_FAILURE);
+                }
+
+                if (bytes_received == 0) {
+                        printf("Server closed connection\n");
+                } else {
+                        buffer[bytes_received] = '\0'; // Null-terminate the received data
+                        printf("Received response: %s\n", buffer);
+                }
+		
+		memset(command, '\0', sizeof(command));
+		
 		register_user(command);
 
 		if (send(client_fd, command, strlen(command), 0) < 0) {
@@ -98,7 +121,7 @@ int main(){
                         exit(EXIT_FAILURE);
                 }
 
-                ssize_t bytes_received;
+               // ssize_t bytes_received;
                 if ((bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0)) < 0) {
                         perror("recv failed");
                         exit(EXIT_FAILURE);
