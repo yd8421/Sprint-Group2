@@ -82,6 +82,9 @@ int main(){
 		
 			send_recv_query(client_fd, command, buffer);
 
+			if(buffer){
+				//already registered, semd to main_menu
+			}
 			memset(command, '\0', sizeof(command));
 			memset(buffer, '\0', sizeof(buffer));
 
@@ -95,11 +98,13 @@ int main(){
 			int try = 3;
 			int f = 0;
 			while(try--){
+				
 				login(command);
 		
 				send_recv_query(client_fd, command, buffer);
-
-				if(strcmp(buffer, "AUTH_SUCCESS")){
+				
+				if(strcmp(buffer, "AUTH_SUCCESS\n") == 0){
+					f = 0;
 					break;
 				}
 				else{
@@ -110,8 +115,14 @@ int main(){
 
 			if(f){
 				printf("Authentication failed! Redirecting to menu\n");
-				sleep(1);
-				continue;
+				
+				memset(command, '\0', sizeof(command));
+				memset(buffer, '\0', sizeof(buffer));
+				
+				printf("\nPress ENTER KEY to continue: ");
+				myflush();
+				
+				continue;	
 			}
 
 
@@ -142,6 +153,7 @@ int main(){
 			close(client_fd);
 			return 0;
 		}
+		
 		memset(command, '\0', sizeof(command));
 		memset(buffer, '\0', sizeof(buffer));
 

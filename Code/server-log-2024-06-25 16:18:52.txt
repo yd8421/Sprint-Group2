@@ -1,0 +1,69 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-25 16:18:52
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: AUTH_USER 2000 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[INFO] Buffer: AUTH_USER 1 passw
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[INFO] Buffer: AUTH_USER 1 xdssw
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[INFO] Buffer: ADD_LOGIN 1 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[SERVER] User login info '1' has been added to the database
+[INFO] Buffer: ADD_USER 1 2 1 1 N
+[INFO] Request recieved to add user '1'
+[INFO] Sent the following response to the client: 
+[SERVER] User info '1' has been added to the database
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 1 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[INFO] Buffer: ADD_LOGIN 1 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[SERVER] User '1' is already registered to the CFS
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
