@@ -1,0 +1,53 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-25 06:58:06
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: CFS_CODE 9000
+[INFO] Request recieved to retrieve code for user forwarding data of '9000'
+[INFO] Sent the following response to the client: 
+NF
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 9000
+[INFO] Request recieved to retrieve code for user forwarding data of '9000'
+[INFO] Sent the following response to the client: 
+NF
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 9000
+[INFO] Request recieved to retrieve code for user forwarding data of '9000'
+[INFO] Sent the following response to the client: 
+NF
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 9000
+[INFO] Request recieved to retrieve code for user forwarding data of '9000'
+[INFO] Sent the following response to the client: 
+NF
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 2001
+[INFO] Request recieved to retrieve code for user forwarding data of '2001'
+[INFO] Sent the following response to the client: 
+F 2002 1
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 9000
+[INFO] Request recieved to retrieve code for user forwarding data of '9000'
+[INFO] Sent the following response to the client: 
+NF
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 9000
+[INFO] Request recieved to retrieve code for user forwarding data of '9000'
+[INFO] Sent the following response to the client: 
+NF
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 2001
+[INFO] Request recieved to retrieve code for user forwarding data of '2001'
+[INFO] Sent the following response to the client: 
+F 2002 1
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
