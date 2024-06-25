@@ -3,6 +3,26 @@
 
 sqlite3* g_db;
 
+// Used to get the current time
+char* get_current_time() {
+    time_t rawTime;
+    struct tm *timeInfo;
+    char *buffer;
+
+    time(&rawTime);
+    timeInfo = localtime(&rawTime);
+
+    buffer = (char*)malloc(20 * sizeof(char));
+    if (buffer == NULL) {
+        perror("Failed to allocate memory");
+        return NULL;
+    }
+
+    strftime(buffer, 20, "%Y-%m-%d %H:%M:%S", timeInfo);
+
+    return buffer;
+}
+
 // Used to display the results from the SQL SELECT query
 int sql_select_callback(void *NotUsed, int argc, char **argv, char **azColName){
   int i;
@@ -496,18 +516,32 @@ void update_forwarding_type(const char* clientNumber, int forwardingType)
 }
 
 // Function to handle client requests
-void handle_client(int client_socket) {
+void handle_client(int client_socket, const char* logFileName) {
     char buffer[1024] = {0};
+    char logMsg[128];
+    FILE* logger = fopen(logFileName, "a");
+    // if (fseek(logger, 0, SEEK_END) != 0) {
+    //     perror("[ERROR] Error seeking to end of log file");
+    //     sprintf(logMsg, "[SERVER] Error seeking to end of log file. Couldn't process the request.");
+    //     send(client_socket, logMsg, strlen(logMsg), 0);
+    //     return;
+    // }
+
     char response_message[RESPONSE_SIZE];
     int valread;
     
     valread = read(client_socket, buffer, 1024);
     if (valread <= 0) {
-        fprintf(stderr, "[ERROR] Error reading from client.\n");
+        sprintf(logMsg, "[ERROR] Error reading from client\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+        fprintf(stderr, "[ERROR] Error reading from client\n");
+        fclose(logger);
         return;
     }
 
     printf("[INFO] Buffer: %s\n", buffer);
+    sprintf(logMsg, "[INFO] Buffer: %s\n", buffer);
+    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
     // It handles these requests
     // ADD_LOGIN    - Add login info for the client number to access CFS system
@@ -526,6 +560,9 @@ void handle_client(int client_socket) {
     if (strcmp(token_params, "ADD_LOGIN") == 0) {
         // Example: add_login_details(g_db, "user1", "password1");
         printf("[INFO] Request recieved to add login\n");
+        sprintf(logMsg, "[INFO] Request recieved to add login\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         const char* userId = strtok(buffer, " ");
         const char* password = strtok(buffer, " ");
         add_login_details(userId, password);
@@ -548,20 +585,30 @@ void handle_client(int client_socket) {
 
         // Example: add_user_data(g_db, 1, "1234567890", 1, 1, "Busy");
         printf("[INFO] Request recieved to add user '%s'\n",clientNumber);
+        sprintf(logMsg, "[INFO] Request recieved to add user '%s'\n",clientNumber);
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         add_user_data(clientNumber, forwardingNumber, isRegistered, isActivated, forwardType);
         sprintf(response_message, "[SERVER] User details for '%s' has been added to the database\n", clientNumber);
 
     }  else if (strcmp(token_params, "DEL_USER") == 0) {
         printf("[INFO] Request recieved to delete user info\n");
+        sprintf(logMsg, "[INFO] Request recieved to delete user info\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         char* userId = strtok(NULL, " ");
 
         if(userId == (int) 0)
         {
             printf("[ERROR] No client number was found in the request.\n");
+            sprintf(logMsg, "[ERROR] No client number was found in the request.\n");
+            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
             sprintf(response_message, "[SERVER] No client number was found in the request.\n");
         }
         else{
             printf("[INFO] Request recieved to delete user info of '%s'\n", userId);
+            sprintf(logMsg, "[INFO] Request recieved to delete user info of '%s'\n", userId);
+            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
             // Example: delete_user_data(g_db, 1);
             delete_login_details(userId);
@@ -571,20 +618,37 @@ void handle_client(int client_socket) {
         
     } else if (strcmp(token_params, "VIEW_LOGIN") == 0) {
         printf("[INFO] Request recieved to view login data\n");
+        sprintf(logMsg, "[INFO] Request recieved to view login data\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         view_auth_table();
     } else if (strcmp(token_params, "VIEW_USER") == 0) {
         printf("[INFO] Request recieved to view user forwarding data\n");
+        sprintf(logMsg, "[INFO] Request recieved to view user forwarding data\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         strcpy(response_message, view_forwarding_table());
     } else if (strcmp(token_params, "CFS_STATUS") == 0) {
         char* clientNumber = strtok(NULL, " ");
         printf("[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);
+        sprintf(logMsg, "[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         strcpy(response_message, view_cfs_status(clientNumber));
+
     } else if (strcmp(token_params, "CFS_CODE") == 0) {
         char* clientNumber = strtok(NULL, " ");
         printf("[INFO] Request recieved to retrieve code for user forwarding data of '%s'\n", clientNumber);
+        sprintf(logMsg, "[INFO] Request recieved to retrieve code for user forwarding data of '%s'\n", clientNumber);
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         strcpy(response_message, view_cfs_code(clientNumber));
+
     } else if (strcmp(token_params, "UPD_USER") == 0) {
         printf("[INFO] Request recieved to update user forwarding data\n");
+        sprintf(logMsg, "[INFO] Request recieved to update user forwarding data\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         char* clientNumber = strtok(NULL, " ");
         char* forwardingNumber = strtok(NULL, " ");
         int isRegistered = atoi(strtok(NULL, " "));
@@ -606,28 +670,50 @@ void handle_client(int client_socket) {
             update_forwarding_number(clientNumber,forwardingNumber);
             printf("[INFO] Updated forwarding number\n");
             sprintf(response_message, "[SERVER] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
+            sprintf(logMsg, "[INFO] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
+            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         }
         if(isActivated != -1)
         {
             update_activation_status(clientNumber,isActivated);
             printf("[INFO] Updated forwarding activation status\n");
             sprintf(response_message + strlen(response_message), "[SERVER] Activation status for '%s' has been updated to '%s'\n", clientNumber, isActivated ? "ACTIVE" : "NOT ACTIVE");
+            sprintf(logMsg, "[INFO] Activation status for '%s' has been updated to '%s'\n", clientNumber, isActivated ? "ACTIVE" : "NOT ACTIVE");
+            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
         }
         if(forwardType != -1)
         {
             update_forwarding_type(clientNumber, forwardType);
             printf("[INFO] Updated forwarding type\n");
+            sprintf(logMsg, "[INFO] Updated forwarding type\n");
+            fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            
             sprintf(response_message + strlen(response_message), "[SERVER] Forwarding type for '%s' has been updated to ", clientNumber);
-            if (forwardType == 1) 
+            if (forwardType == 1) {
                 sprintf(response_message + strlen(response_message), "'Unconditional'\n");
-            if (forwardType == 2) 
+                sprintf(logMsg, "[INFO] Forward Type: Unconditional\n");
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+                
+            }
+            if (forwardType == 2) {
                 sprintf(response_message + strlen(response_message), "'No Reply'\n");
-            if (forwardType == 3) 
+                sprintf(logMsg, "[INFO] Forward Type: No Reply\n");
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
+            if (forwardType == 3) {
                 sprintf(response_message + strlen(response_message), "'Busy'\n");
+                sprintf(logMsg, "[INFO] Forward Type: Busy\n");
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
         }
 
     } else {
         fprintf(stderr, "[WARN] Unknown command received from client: %s\n", buffer);
+        sprintf(logMsg, "[WARN] Unknown command received from client: %s\n", buffer);
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+                
     }
 
     // while(token_params != NULL)
@@ -638,4 +724,8 @@ void handle_client(int client_socket) {
     // Respond back to the client if needed
     // Example: 
     send(client_socket, response_message, strlen(response_message), 0);
+    sprintf(logMsg, "[INFO] Sent the following response to the client: \n");
+    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+    fwrite(response_message, sizeof(char), strlen(response_message), logger);
+    fclose(logger);
 }
