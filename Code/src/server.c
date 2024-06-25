@@ -109,6 +109,7 @@ int main() {
         fclose(logger);
     }
     
+    close(new_socket);
     close(server_fd);
     sprintf(logMsg, "[INFO] Closing server\n");
     printf("[INFO] Closing server\n");
