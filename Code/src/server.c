@@ -29,7 +29,13 @@ int main() {
     sprintf(logMsg, "[INFO] Opening database\n");
     printf("[INFO] Opening database\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
-    open_database();
+    if(open_database()) 
+    {
+        sprintf(logMsg, "[FATAL] Failed to open the database and set the required tables\n");
+        printf("[FATAL] Failed to open the database and set the required tables\n");
+        fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+        exit(1);
+    }
     
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -115,10 +121,10 @@ int main() {
     printf("[INFO] Closing server\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
-    close_database(); // Close SQLite database
     sprintf(logMsg, "[INFO] Closing SQLite server\n");
     printf("[INFO] Closing SQLite server\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+    close_database(); // Close SQLite database  
 
     sprintf(logMsg, "[INFO] Closing the logger\n");
     printf("[INFO] Closing the logger\n");

@@ -41,12 +41,12 @@ void handle_error(sqlite3* g_db) {
 }
 
 // Function to open SQLite connection
-void open_database() {
+int open_database() {
     int returnCode = sqlite3_open("cfs_data.db", &g_db);
     if (returnCode != SQLITE_OK) {
-        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(g_db));
+        fprintf(stderr, "[ERROR] Cannot open database: %s\n", sqlite3_errmsg(g_db));
         sqlite3_close(g_db);
-        exit(1);
+        return 1;
     }
 
     char *zErrMsg = 0;
@@ -54,17 +54,19 @@ void open_database() {
     returnCode = sqlite3_exec(g_db, init_table1, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Failed to create table: %s\n", sqlite3_errmsg(g_db));
+        fprintf(stderr, "[FATAL] Failed to create table: %s\n", sqlite3_errmsg(g_db));
+        return 1;
     }
 
     const char *init_table2 = "CREATE TABLE IF NOT EXISTS authinfo (clientNumber TEXT PRIMARY KEY,passkey TEXT);";
     returnCode = sqlite3_exec(g_db, init_table2, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Failed to create table: %s\n", sqlite3_errmsg(g_db));
+        fprintf(stderr, "[FATAL] Failed to create table: %s\n", sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
-        return;
+        return 1;
     }
+    return 0;
 }
 
 // Function to close SQLite connection

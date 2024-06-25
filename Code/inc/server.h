@@ -17,7 +17,7 @@
 extern char* get_current_time();
 
 extern void handle_error(sqlite3*);
-extern void open_database();
+extern int open_database();
 extern void close_database();
 
 extern char* add_login_details(const char*, const char* password);
