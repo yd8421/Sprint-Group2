@@ -601,7 +601,7 @@ int handle_client(int client_socket, const char* logFileName) {
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
         fprintf(stderr, "[ERROR] Error reading from client\n");
         fclose(logger);
-        return 0;
+        return 1;
     }
 
     if(strcmp(buffer, "EXIT") == 0)
