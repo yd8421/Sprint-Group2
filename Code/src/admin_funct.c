@@ -14,6 +14,8 @@ void myflush(void){
 	while(getchar() != '\n');
 }
 
+// login function to authenticate admin access to our program
+
 int login()
 {
     char user[10];
@@ -32,7 +34,7 @@ int login()
         return 1;
     }
     else
-        return -1;
+        return 0;
 }
 
 void create_command(char command[], int ch){
@@ -209,7 +211,7 @@ int fill_command(char command[],int choice)
 			break;
 
 		case 3: ch = update_menu();
-		        if(ch == 5)return 0;
+		        if(ch == 5)return 10;
 			create_command(command, ch);
 			break;	
 
@@ -222,7 +224,7 @@ int fill_command(char command[],int choice)
 			}
 			break;
 
-		case 5: return 10;
+		case 5: return 0;
 	}
 	return 1;
 }

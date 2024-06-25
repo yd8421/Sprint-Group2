@@ -7,22 +7,22 @@ int main()
     int try=3, login_status=0;
     while(try--)
     {
-        if(login()==1){			//check login authentication
+        if(login()==1){
             login_status=1;
             break;
         }
-	system("clear");		//to refresh/clear the screen
+	system("clear");
 	printf("You have %d tries left\n\n", try);
             
     }
 
-    if(login_status==0)			//checking if login failed or not
+    if(login_status==0)
     {
         printf("\nWrong credentials. Exiting the program. \n\n");
         return 0;
     }
 
-    int sock = 0, valread;		//for socket creation, check buffer size
+    int sock = 0, valread;
     struct sockaddr_in serv_addr;
     char command[1024] = {0};
     char buffer[1024] = {0};
@@ -53,45 +53,32 @@ int main()
 
     while(1){
     	int choice = admin_menu();
-    	myflush();
-	if(choice == 5){
-		send(sock, "EXIT", 4, 0);
-		valread = read(sock, buffer, 1024);
-	 	
-		close(sock);
+    	if(choice == 5){
+	 	close(sock);
 	    	return 0;
     	}
 	int ch = fill_command(command, choice);
-
  	if(ch == 0){
-		send(sock, "EXIT", 4, 0);
-		valread = read(sock, buffer, 1024);
-		
 		close(sock);
 	    	return 0;
 	}
 	
 	if(ch == 10){
-		
-		memset(command, '\0', sizeof(command));
-		memset(buffer, '\0', sizeof(buffer));
-		
 		continue;
 	}
 
    	send(sock, command, strlen(command), 0);
-    	printf("Sent command: %s\n\n", command);
-    	
-	valread = read(sock, buffer, 1024);
+    	printf("Sent command: %s\n", command);
+    
+    	valread = read(sock, buffer, 1024);
     	if (valread > 0) {
-        	printf("Server response: %s\n\n", buffer);
+        	printf("Server response:\n\n%s\n", buffer);
     	}
 
 	memset(command, '\0', sizeof(command));
-	memset(buffer, '\0', sizeof(buffer));
-
-	printf("\nPress ENTER KEY to continue: ");
-    	myflush();
+	printf("Press ENTER KEY to continue: ");
+	myflush();
+	
     }
 
     close(sock);

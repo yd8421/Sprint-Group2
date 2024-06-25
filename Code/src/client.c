@@ -67,7 +67,7 @@ int main(){
 				if(forward_type == 1){
 					printf("Call connected\n\n");
 				}
-				else if(forward_type == 2){
+				else if(forward_type == 3){
 					printf("The number you called is BUSY\n\n");
 				}
 				else{
