@@ -73,9 +73,10 @@ void close_database() {
 }
 
 // Function to add login details to SQLite database
-void add_login_details(const char* userId, const char* password)
+char* add_login_details(const char* userId, const char* password)
 {
   char sql_query[256];
+  char* responseData = (char*)malloc(256 * sizeof(char));
   char *zErrMsg = 0;
   int returnCode;
   sprintf(sql_query, "INSERT INTO authinfo VALUES (");
@@ -85,23 +86,33 @@ void add_login_details(const char* userId, const char* password)
   // printf("[DEBUG] Prepared String: %s\n", sql_query);
   returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
   if( returnCode == SQLITE_CONSTRAINT){
-    // Log this section under ERROR
-    fprintf(stderr, "[ERROR] User '%s' is already registered to the CFS\n", userId);
-    //fprintf(stderr, "Failed to execute query: %s\n", sqlite3_errmsg(g_db));
-    sqlite3_free(zErrMsg);
-    return;
-  }
-  if( returnCode ){
-    // Log this section under ERROR
-    fprintf(stderr, "Failed to execute query: %s\n", sqlite3_errmsg(g_db));
-    sqlite3_free(zErrMsg);
-    return;
-  }
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] User '%s' is already registered to the CFS\n", userId);
+        sprintf(responseData, "[ERROR] User '%s' is already registered to the CFS\n", userId);
+        //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
+        sqlite3_free(zErrMsg);
+        return responseData;
+    }
+    if ( returnCode ) {
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] Error occured while adding user '%s'\n", userId);
+        sprintf(responseData, "[ERROR] Error occured while adding user '%s'\n", userId);
+        //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
+        sqlite3_free(zErrMsg);
+        return responseData;
+    }
+    else {
+        // Message: Client info has been added to the database
+        printf("[INFO] User login info '%s' has been added to the database\n", userId);
+        sprintf(responseData, "[INFO] User login info '%s' has been added to the database\n", userId);
+        return responseData;
+    }
 }
 
 // Function to add user data to SQLite database
-void add_user_data(const char* clientNumber, const char* forwardingNumber, int isRegistered, int isActivated, int forwardingType) {
+char* add_user_data(const char* clientNumber, const char* forwardingNumber, int isRegistered, int isActivated, int forwardingType) {
     char sql_query[256];
+    char* responseData = (char*)malloc(256 * sizeof(char));
     char *zErrMsg = 0;
     int returnCode;
     sprintf(sql_query, "INSERT INTO forwardinfo VALUES (");
@@ -115,10 +126,25 @@ void add_user_data(const char* clientNumber, const char* forwardingNumber, int i
     returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
     if( returnCode == SQLITE_CONSTRAINT){
         // Log this section under ERROR
-        fprintf(stderr, "User '%s' already exist!\n", clientNumber);
+        fprintf(stderr, "[ERROR] User '%s' already exist!\n", clientNumber);
+        sprintf(responseData, "[ERROR] User '%s' already exist!\n", clientNumber);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
-        return;
+        return responseData;
+    }
+    if ( returnCode ) {
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] Error occured while adding user '%s'\n", clientNumber);
+        sprintf(responseData, "[ERROR] Error occured while adding user '%s'\n", clientNumber);
+        //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
+        sqlite3_free(zErrMsg);
+        return responseData;
+    }
+    else {
+        // Message: Client info has been added to the database
+        printf("[INFO] User info '%s' has been added to the database\n", clientNumber);
+        sprintf(responseData, "[INFO] User info '%s' has been added to the database\n", clientNumber);
+        return responseData;
     }
 }
 
@@ -602,8 +628,8 @@ void handle_client(int client_socket, const char* logFileName) {
 
         const char* userId = strtok(buffer, " ");
         const char* password = strtok(buffer, " ");
-        add_login_details(userId, password);
-        sprintf(response_message, "[SERVER] User login details for '%s' has been added to the database\n", userId);
+        
+        strcpy(response_message, add_login_details(userId, password));
         
     } else if (strcmp(token_params, "ADD_USER") == 0) {
         char* clientNumber = strtok(NULL, " ");
@@ -625,8 +651,7 @@ void handle_client(int client_socket, const char* logFileName) {
         sprintf(logMsg, "[INFO] Request recieved to add user '%s'\n",clientNumber);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
-        add_user_data(clientNumber, forwardingNumber, isRegistered, isActivated, forwardType);
-        sprintf(response_message, "[SERVER] User details for '%s' has been added to the database\n", clientNumber);
+        strcpy(response_message, add_user_data(clientNumber, forwardingNumber, isRegistered, isActivated, forwardType));
 
     }  else if (strcmp(token_params, "DEL_USER") == 0) {
         printf("[INFO] Request recieved to delete user info\n");
