@@ -36,6 +36,7 @@ extern char* view_cfs_status(const char*);
 extern char* view_cfs_code(const char*);
 
 extern int update_forwarding_number(const char*, const char*);
+extern int update_registration_status(const char*, int);
 extern int update_activation_status(const char*, int);
 extern int update_forwarding_type(const char*, int);
 

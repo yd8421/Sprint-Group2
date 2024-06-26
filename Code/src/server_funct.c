@@ -571,6 +571,27 @@ int update_forwarding_number(const char* clientNumber, const char* forwardingNum
     return 0;
 }
 
+// Function to update registration status for a client
+int update_registration_status(const char* clientNumber, int isRegistered)
+{
+    char sql_query[256];
+    char *zErrMsg = 0;
+    int returnCode;
+
+    sprintf(sql_query, "UPDATE forwardinfo SET ");
+    sprintf(sql_query + strlen(sql_query), "isRegistered=%d", isRegistered);
+    sprintf(sql_query + strlen(sql_query), " WHERE clientNumber='%s';", clientNumber);
+    //printf("[DEBUG] Prepared String: %s\n", sql_query);
+    returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
+    if( returnCode ){
+        // Log this section under ERROR
+        fprintf(stderr, "[ERROR] Failed to update registration status: %s\n", sqlite3_errmsg(g_db));
+        sqlite3_free(zErrMsg);
+        return 1;
+    }
+    return 0;
+}
+
 // Function to update call forwarding activation status for a client
 int update_activation_status(const char* clientNumber, int isActivated)
 {
@@ -817,6 +838,22 @@ int handle_client(int client_socket, const char* logFileName) {
                 printf("[INFO] Updated forwarding number\n");
                 sprintf(response_message, "[SERVER] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
                 sprintf(logMsg, "[INFO] Forwarding number for '%s' has been updated to '%s'\n", clientNumber, forwardingNumber);
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
+
+        }
+        if(isRegistered != -1)
+        {
+            if(update_registration_status(clientNumber,isActivated)){
+                printf("[ERROR] Failed to update registration status for user '%s'\n", clientNumber);
+                sprintf(response_message + strlen(response_message), "[SERVER] Failed to update registration status for user '%s'\n", clientNumber);
+                sprintf(logMsg, "[ERROR] Failed to update registration status for user '%s'\n", clientNumber);
+                fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+            }
+            else {
+                printf("[INFO] Registration status for '%s' has been updated to '%s'\n", clientNumber, isRegistered ? "REGISTERED" : "UNREGISTERED");
+                sprintf(response_message + strlen(response_message), "[SERVER] Registration status for '%s' has been updated to '%s'\n", clientNumber, isRegistered ? "REGISTERED" : "UNREGISTERED");
+                sprintf(logMsg, "[INFO] Registration status for '%s' has been updated to '%s'\n", clientNumber, isRegistered ? "REGISTERED" : "UNREGISTERED");
                 fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
             }
 
