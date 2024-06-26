@@ -1,6 +1,6 @@
 #include<client.h>
 
-char user_no[11];
+char user_no[11]={0};
 
 int main(){
 

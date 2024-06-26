@@ -55,7 +55,7 @@ char* encrypt_string(const char* string)
     strcpy(newString, string);
     
     for(int i=0; i<len; i++){
-        newString[i] += 34;
+        newString[i] += ENCRYPT_KEY;
     }
     
     return newString;
@@ -70,7 +70,7 @@ char* decrypt_string(const char* string)
     strcpy(newString, string);
     
     for(int i=0; i<len; i++){
-        newString[i] -= 34;
+        newString[i] -= ENCRYPT_KEY;
     }
     
     return newString;
