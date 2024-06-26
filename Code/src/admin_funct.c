@@ -14,6 +14,37 @@ void myflush(void){
 	while(getchar() != '\n');
 }
 
+
+// Function to encrypt a string with a ENCRYPT_KEY (offset value)
+char* encrypt_string(const char* string)
+{
+    size_t len = strlen(string);
+    char* newString = (char*)malloc((len + 1) * sizeof(char));
+    
+    strcpy(newString, string);
+    
+    for(int i=0; i<len; i++){
+        newString[i] += 34;
+    }
+    
+    return newString;
+}
+
+// Function to decrypt a string with a ENCRYPT_KEY (offset value)
+char* decrypt_string(const char* string)
+{
+    size_t len = strlen(string);
+    char* newString = (char*)malloc((len + 1) * sizeof(char));
+    
+    strcpy(newString, string);
+    
+    for(int i=0; i<len; i++){
+        newString[i] -= 34;
+    }
+    
+    return newString;
+}
+
 // login function to authenticate admin access to our program
 
 int login()

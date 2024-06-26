@@ -34,6 +34,36 @@ int sql_select_callback(void *NotUsed, int argc, char **argv, char **azColName){
   return 0;
 }
 
+// Function to encrypt a string with a ENCRYPT_KEY (offset value)
+char* encrypt_string(const char* string)
+{
+    size_t len = strlen(string);
+    char* newString = (char*)malloc((len + 1) * sizeof(char));
+    
+    strcpy(newString, string);
+    
+    for(int i=0; i<len; i++){
+        newString[i] += 34;
+    }
+    
+    return newString;
+}
+
+// Function to decrypt a string with a ENCRYPT_KEY (offset value)
+char* decrypt_string(const char* string)
+{
+    size_t len = strlen(string);
+    char* newString = (char*)malloc((len + 1) * sizeof(char));
+    
+    strcpy(newString, string);
+    
+    for(int i=0; i<len; i++){
+        newString[i] -= 34;
+    }
+    
+    return newString;
+}
+
 // Function to handle SQLite errors
 void handle_error(sqlite3* g_db) {
     fprintf(stderr, "[ERROR] SQLite error: %s\n", sqlite3_errmsg(g_db));
@@ -606,12 +636,16 @@ int handle_client(int client_socket, const char* logFileName) {
         fclose(logger);
         return 1;
     }
-
+    
+    char decr_buffer[1024];
+    strcpy(decr_buffer, decrypt_string(buffer));
+    strcpy(buffer, decr_buffer);
     if(strcmp(buffer, "EXIT") == 0)
     {
         send(client_socket, "EXIT", strlen("EXIT"), 0);
         return 1;
     }
+
     printf("[INFO] Buffer: %s\n", buffer);
     sprintf(logMsg, "[INFO] Buffer: %s\n", buffer);
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
@@ -852,10 +886,15 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // Respond back to the client if needed
     // Example: 
-    send(client_socket, response_message, strlen(response_message), 0);
+    char encr_response_message[RESPONSE_SIZE];
+    strcpy(encr_response_message, encrypt_string(response_message));
+    send(client_socket, encr_response_message, strlen(response_message), 0);
     sprintf(logMsg, "[INFO] Sent the following response to the client: \n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     fwrite(response_message, sizeof(char), strlen(response_message), logger);
+    sprintf(logMsg, "[DEBUG] Sent the following response to the client: \n");
+    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+    fwrite(encr_response_message, sizeof(char), strlen(encr_response_message), logger);
     fclose(logger);
     return 0;
 }

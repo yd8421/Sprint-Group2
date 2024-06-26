@@ -13,8 +13,12 @@
 #define PORT 12345
 #define MAX_CLIENTS 5
 #define RESPONSE_SIZE 8192
+#define ENCRYPT_KEY 34
 
 extern char* get_current_time();
+
+extern char* encrypt_string(const char*);
+extern char* decrypt_string(const char*);
 
 extern void handle_error(sqlite3*);
 extern int open_database();

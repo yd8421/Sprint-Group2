@@ -13,6 +13,35 @@ void send_recv_query(int, char[], char[]);
 
 char user_no[11];
 
+// Function to encrypt a string with a ENCRYPT_KEY (offset value)
+char* encrypt_string(const char* string)
+{
+    size_t len = strlen(string);
+    char* newString = (char*)malloc((len + 1) * sizeof(char));
+    
+    strcpy(newString, string);
+    
+    for(int i=0; i<len; i++){
+        newString[i] += 34;
+    }
+    
+    return newString;
+}
+
+// Function to decrypt a string with a ENCRYPT_KEY (offset value)
+char* decrypt_string(const char* string)
+{
+    size_t len = strlen(string);
+    char* newString = (char*)malloc((len + 1) * sizeof(char));
+    
+    strcpy(newString, string);
+    
+    for(int i=0; i<len; i++){
+        newString[i] -= 34;
+    }
+    
+    return newString;
+}
 
 void myflush(void){
 	while(getchar() != '\n');
@@ -23,7 +52,11 @@ void save(char userNo[]){
 }
 
 void send_recv_query(int client_fd, char command[], char buffer[]){
-	if (send(client_fd, command, strlen(command), 0) < 0) {
+	char encr_command[1024];
+        strcpy(encr_command, encrypt_string(command));
+        strcpy(command, encr_command);
+        
+        if (send(client_fd, command, strlen(command), 0) < 0) {
                         perror("send failed");
                         exit(EXIT_FAILURE);
         }
@@ -38,6 +71,10 @@ void send_recv_query(int client_fd, char command[], char buffer[]){
         if (bytes_received == 0) {
         	printf("Server closed connection\n");
         } else {
+                char decr_buffer[1024];
+                //printf("Server response: %s\n\n", buffer);
+                strcpy(decr_buffer, decrypt_string(buffer));
+                strcpy(buffer, decr_buffer);
                 buffer[bytes_received] = '\0'; // Null-terminate the received data
                 printf("Received response: %s\n", buffer);
         }

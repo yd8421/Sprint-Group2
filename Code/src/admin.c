@@ -79,11 +79,18 @@ int main()
 		continue;
 	}
 
-   	send(sock, command, strlen(command), 0);
+    char encr_command[1024];
+    strcpy(encr_command, encrypt_string(command));
+   	send(sock, encr_command, strlen(encr_command), 0);
     	printf("Sent command: %s\n\n", command);
     	
 	valread = read(sock, buffer, 1024);
+
     	if (valread > 0) {
+            char decr_buffer[1024];
+            //printf("Server response: %s\n\n", buffer);
+            strcpy(decr_buffer, decrypt_string(buffer));
+            strcpy(buffer, decr_buffer);
         	printf("Server response: %s\n\n", buffer);
     	}
 
