@@ -1,0 +1,322 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 03:47:34
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: ADD_LOGIN 300 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[ERROR] User '300' is already registered to the CFS
+[DEBUG] Sent the following response to the client: 
+}gttqtBw•‡”BIURRIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: AUTH_USER 300 pass1
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjkpx,[INFO] Buffer: AUTH_USER 300 pass1
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjkpx,[INFO] Buffer: AUTH_USER 300 pass1
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjkpx,[INFO] Buffer: ADD_LOGIN 300 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[ERROR] User '300' is already registered to the CFS
+[DEBUG] Sent the following response to the client: 
+}gttqtBw•‡”BIURRIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA 0 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA 0 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA -1 0 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Activation status for '300' has been updated to 'NOT ACTIVE'
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[SERVER] Activation status for '300' has been updated to 'NOT ACTIVE'
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,}ugtxgtBc…–‹˜ƒ–‹‘B•–ƒ–—•Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIpqvBcevkxgI,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA -1 -1 U
+[INFO] Request recieved to update user forwarding data
+[INFO] Updated forwarding type
+[INFO] Forward Type: Unconditional
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[SERVER] Forwarding type for '300' has been updated to 'Unconditional'
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,}ugtxgtBh‘”™ƒ”†‹‰B–›’‡Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIw…‘†‹–‹‘ƒI,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 400 -1 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Forwarding number for '300' has been updated to '400'
+[INFO] Sent the following response to the client: 
+[SERVER] Forwarding number for '300' has been updated to '400'
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBh‘”™ƒ”†‹‰B—„‡”Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIVRRI,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA -1 1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Activation status for '300' has been updated to 'ACTIVE'
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[SERVER] Activation status for '300' has been updated to 'ACTIVE'
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,}ugtxgtBc…–‹˜ƒ–‹‘B•–ƒ–—•Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIcevkxgI,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA -1 -1 U
+[INFO] Request recieved to update user forwarding data
+[INFO] Updated forwarding type
+[INFO] Forward Type: Unconditional
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[SERVER] Forwarding type for '300' has been updated to 'Unconditional'
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,}ugtxgtBh‘”™ƒ”†‹‰B–›’‡Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIw…‘†‹–‹‘ƒI,[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA -1 1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Activation status for '300' has been updated to 'ACTIVE'
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[SERVER] Activation status for '300' has been updated to 'ACTIVE'
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,}ugtxgtBc…–‹˜ƒ–‹‘B•–ƒ–—•Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIcevkxgI,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+F 400 1
+[DEBUG] Sent the following response to the client: 
+hBVRRBS,[INFO] Buffer: AUTH_USER 09090 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjkpx,[INFO] Buffer: AUTH_USER 09090 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjkpx,[INFO] Buffer: AUTH_USER 09090 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjkpx,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA 0 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+F 400 1
+[DEBUG] Sent the following response to the client: 
+hBVRRBS,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: VIEW_USER
+[INFO] Request recieved to view user forwarding data
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 1           | 1           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[INFO] Buffer: VIEW_USER
+[INFO] Request recieved to view user forwarding data
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 1           | 1           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[INFO] Buffer: VIEW_USER
+[INFO] Request recieved to view user forwarding data
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 1           | 1           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[INFO] Buffer: #6'2
+[WARN] Unknown command received from client: #6'2
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 1           | 1           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 300 NA -1 0 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Activation status for '300' has been updated to 'NOT ACTIVE'
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[SERVER] Activation status for '300' has been updated to 'NOT ACTIVE'
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,}ugtxgtBc…–‹˜ƒ–‹‘B•–ƒ–—•Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIpqvBcevkxgI,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: VIEW_USER
+[INFO] Request recieved to view user forwarding data
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 1           | 0           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[INFO] Buffer: #6'2
+[WARN] Unknown command received from client: #6'2
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 1           | 0           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

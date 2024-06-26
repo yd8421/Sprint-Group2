@@ -12,6 +12,6 @@ extern char* encrypt_string(const char*);
 extern char* decrypt_string(const char*);
 
 extern void myflush(void);
-extern int fill_command(char[], int);
+extern int create_command_helper(char[], int);
 extern int login(void);
 extern int admin_menu(void);
