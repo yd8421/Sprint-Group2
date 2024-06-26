@@ -956,12 +956,18 @@ int handle_client(int client_socket, const char* logFileName) {
     char encr_response_message[RESPONSE_SIZE];
     strcpy(encr_response_message, encrypt_string(response_message));
     send(client_socket, encr_response_message, strlen(response_message), 0);
+
     sprintf(logMsg, "[INFO] Sent the following response to the client: \n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     fwrite(response_message, sizeof(char), strlen(response_message), logger);
+
     sprintf(logMsg, "[DEBUG] Sent the following response to the client: \n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     fwrite(encr_response_message, sizeof(char), strlen(encr_response_message), logger);
+
+    sprintf(logMsg, "\n");
+    fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+
     fclose(logger);
     return 0;
 }
