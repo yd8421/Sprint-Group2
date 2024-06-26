@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <time.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -14,6 +15,8 @@
 #define MAX_CLIENTS 5
 #define RESPONSE_SIZE 8192
 #define ENCRYPT_KEY 34
+
+extern void interrupt_handler(int);
 
 extern char* get_current_time();
 

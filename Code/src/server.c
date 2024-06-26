@@ -96,6 +96,7 @@ int main() {
     
     fclose(logger);
 
+    signal(SIGINT, interrupt_handler);
     while (1) {
         logger = fopen(logFileName, "a");
         // Accept incoming connection
@@ -135,8 +136,8 @@ int main() {
     printf("[INFO] Closing server\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
-    sprintf(logMsg, "[INFO] Closing SQLite server\n");
-    printf("[INFO] Closing SQLite server\n");
+    sprintf(logMsg, "[INFO] Closing SQLite database connection\n");
+    printf("[INFO] Closing SQLite database connection\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     close_database(); // Close SQLite database  
 

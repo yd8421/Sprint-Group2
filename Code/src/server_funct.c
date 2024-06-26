@@ -3,6 +3,16 @@
 
 sqlite3* g_db;
 
+// Function to handle SIGINT signal (Ctrl+C) to close the server
+void interrupt_handler(int sig)
+{
+    signal(sig, SIG_IGN);
+    printf("[INFO] Interrupt occured: Closing server\n");
+    printf("[INFO] Closing SQLite database connection\n");
+    close_database();
+    exit(0);
+}
+
 // Used to get the current time
 char* get_current_time() {
     time_t rawTime;
