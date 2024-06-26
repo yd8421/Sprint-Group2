@@ -1,0 +1,43 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 03:30:41
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: CFS_CODE 2004
+[INFO] Request recieved to retrieve code for user forwarding data of '2004'
+[INFO] Sent the following response to the client: 
+F 3004 2
+[DEBUG] Sent the following response to the client: 
+hBURRVBT,[INFO] Buffer: ADD_LOGIN 2000011111 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[SERVER] User login info '2000011111' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‘‰‹B‹ˆ‘BITRRRRSSSSSIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,[INFO] Buffer: ADD_USER 2000011111 23 1 1 U
+[INFO] Request recieved to add user '2000011111'
+[INFO] Sent the following response to the client: 
+[SERVER] User info '2000011111' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BITRRRRSSSSSIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,[INFO] Buffer: ADD_LOGIN 2000011111 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[SERVER] User '2000011111' is already registered to the CFS
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”BITRRRRSSSSSIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,[INFO] Buffer: ADD_USER 2000011111 1 1 1 U
+[INFO] Request recieved to add user '2000011111'
+[INFO] Sent the following response to the client: 
+[SERVER] User '2000011111' already exist!
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”BITRRRRSSSSSIBƒ”‡ƒ†›B‡š‹•–C,[INFO] Buffer: AUTH_USER 2000011111 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[INFO] Buffer: UPD_USER 2000011111 NA 0 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

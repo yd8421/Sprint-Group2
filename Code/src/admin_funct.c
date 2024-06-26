@@ -4,11 +4,11 @@
 
 int login(void);
 int admin_menu(void);
-int update_menu(void);
-void create_command(char[], int);
-
 void myflush(void);
-int fill_command(char[],int);
+int create_command_helper(char[],int);
+
+static int update_menu(void);
+static void create_command(char[], int);
 
 void myflush(void){
 	while(getchar() != '\n');
@@ -228,7 +228,7 @@ int update_menu(){
         return choice;
 }
 
-int fill_command(char command[],int choice)
+int create_command_helper(char command[],int choice)
 {
 
 	int ch, admin_menu_choice;

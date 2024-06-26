@@ -61,7 +61,7 @@ int main()
 		close(sock);
 	    	return 0;
     	}
-	int ch = fill_command(command, choice);
+	int ch = create_command_helper(command, choice);
 
  	if(ch == 0){
 		send(sock, "EXIT", 4, 0);

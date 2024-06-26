@@ -82,10 +82,20 @@ int main(){
 		
 			send_recv_query(client_fd, command, buffer);
 
-			if(buffer){
-				//already registered, semd to main_menu
-			}
+			char* token = strtok(buffer, " ");
+			printf("Login from the Main Menu\n");
+
 			memset(command, '\0', sizeof(command));
+
+			if(strcmp(token, "[ERROR]") == 0){
+				
+				printf("\nPress ENTER KEY to continue: ");
+				memset(buffer, '\0', sizeof(buffer));
+			
+				myflush();
+				continue;
+			}
+			
 			memset(buffer, '\0', sizeof(buffer));
 
 			register_user(command);
@@ -144,7 +154,7 @@ int main(){
 			}
 		
 			create_update_cmd(command, ch);
-
+			printf("buffer %s", buffer);
 			send_recv_query(client_fd, command, buffer);
 
 		}
