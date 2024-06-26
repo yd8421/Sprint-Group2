@@ -699,10 +699,10 @@ int handle_client(int client_socket, const char* logFileName) {
     }
     
     printf("[DEBUG] Buffer after decryption: %s\n", buffer);
-    char decr_buffer[1024];
-    strcpy(decr_buffer, decrypt_string(buffer));
+    char* decr_buffer = decrypt_string(buffer);
     strcpy(buffer, decr_buffer);
     printf("[DEBUG] Buffer after decryption: %s\n", buffer);
+    free(decr_buffer);
     if(strcmp(buffer, "EXIT") == 0)
     {
         send(client_socket, "EXIT", strlen("EXIT"), 0);
@@ -802,7 +802,9 @@ int handle_client(int client_socket, const char* logFileName) {
         sprintf(logMsg, "[INFO] Request recieved to view login data\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
-        view_auth_table();
+        char *table_data = view_auth_table();
+        strcpy(response_message, table_data);
+        free(table_data);
     } 
     
     // VIEW_USER    - View the forwarding table of the CFS system
@@ -811,7 +813,9 @@ int handle_client(int client_socket, const char* logFileName) {
         sprintf(logMsg, "[INFO] Request recieved to view user forwarding data\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
-        strcpy(response_message, view_forwarding_table());
+        char *table_data = view_forwarding_table();
+        strcpy(response_message, table_data);
+        free(table_data);
     } 
     
     // AUTH_USER    - For client: Validate the client based on it's number and the obtained password
@@ -967,8 +971,7 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // Respond back to the client if needed
     // Example: 
-    char encr_response_message[RESPONSE_SIZE];
-    strcpy(encr_response_message, encrypt_string(response_message));
+    char* encr_response_message = encrypt_string(response_message);
     send(client_socket, encr_response_message, strlen(response_message), 0);
 
     sprintf(logMsg, "[INFO] Sent the following response to the client: \n");
@@ -982,6 +985,7 @@ int handle_client(int client_socket, const char* logFileName) {
     sprintf(logMsg, "\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
+    free(encr_response_message);
     fclose(logger);
     return 0;
 }
