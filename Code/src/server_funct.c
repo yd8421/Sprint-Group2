@@ -874,7 +874,7 @@ int handle_client(int client_socket, const char* logFileName) {
         }
         if(isRegistered != -1)
         {
-            if(update_registration_status(clientNumber,isActivated)){
+            if(update_registration_status(clientNumber,isRegistered)){
                 printf("[ERROR] Failed to update registration status for user '%s'\n", clientNumber);
                 sprintf(response_message + strlen(response_message), "[SERVER] Failed to update registration status for user '%s'\n", clientNumber);
                 sprintf(logMsg, "[ERROR] Failed to update registration status for user '%s'\n", clientNumber);
