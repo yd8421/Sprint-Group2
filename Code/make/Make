@@ -34,6 +34,9 @@ server:
 sqlite3:
 	$(CC) $(LDFLAGS) $(IFLAGS) $(SRC)/sqlite3.c $(SQFLAGS) -o $(OBJ)/sqlite3.o 
 		
+move:
+	mv *.txt ./data
+	mv *.db ./data
 
 clean:
 	rm $(OBJ)/*.o
