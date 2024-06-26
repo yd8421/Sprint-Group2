@@ -698,7 +698,7 @@ int handle_client(int client_socket, const char* logFileName) {
         return 1;
     }
     
-    printf("[DEBUG] Buffer after decryption: %s\n", buffer);
+    printf("[DEBUG] Buffer before decryption: %s\n", buffer);
     char* decr_buffer = decrypt_string(buffer);
     strcpy(buffer, decr_buffer);
     printf("[DEBUG] Buffer after decryption: %s\n", buffer);
