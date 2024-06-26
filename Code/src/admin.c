@@ -25,7 +25,7 @@ int main()
     int sock = 0, valread;		//for socket creation, check buffer size
     struct sockaddr_in serv_addr;
     char command[1024] = {0};
-    char buffer[1024] = {0};
+    char buffer[BUFFER_LENGTH] = {0};
     
     // Create socket
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -56,7 +56,7 @@ int main()
     	myflush();
 	if(choice == 5){
 		send(sock, "EXIT", 4, 0);
-		valread = read(sock, buffer, 1024);
+		valread = read(sock, buffer, BUFFER_LENGTH);
 	 	
 		close(sock);
 	    	return 0;
@@ -65,7 +65,7 @@ int main()
 
  	if(ch == 0){
 		send(sock, "EXIT", 4, 0);
-		valread = read(sock, buffer, 1024);
+		valread = read(sock, buffer, BUFFER_LENGTH);
 		
 		close(sock);
 	    	return 0;
@@ -84,10 +84,10 @@ int main()
    	send(sock, encr_command, strlen(encr_command), 0);
     	printf("Sent command: %s\n\n", command);
     	
-	valread = read(sock, buffer, 1024);
+	valread = read(sock, buffer, BUFFER_LENGTH);
 
     	if (valread > 0) {
-            char decr_buffer[1024];
+            char decr_buffer[BUFFER_LENGTH];
             //printf("Server response: %s\n\n", buffer);
             strcpy(decr_buffer, decrypt_string(buffer));
             strcpy(buffer, decr_buffer);
