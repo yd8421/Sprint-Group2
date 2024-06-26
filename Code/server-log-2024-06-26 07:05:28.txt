@@ -1,0 +1,19 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 07:05:28
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: #6'2
+[WARN] Unknown command received from client: #6'2
+[INFO] Sent the following response to the client: 
+[DEBUG] Sent the following response to the client: 
+
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: #6'2
+[WARN] Unknown command received from client: #6'2
+[INFO] Sent the following response to the client: 
+[DEBUG] Sent the following response to the client: 
+
+[INFO] Handling incoming client communication

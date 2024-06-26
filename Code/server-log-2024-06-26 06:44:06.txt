@@ -1,0 +1,5 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 06:44:06
+
+[INFO] Opening database
+[FATAL] Bind failed

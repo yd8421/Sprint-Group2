@@ -52,10 +52,10 @@ int main()
     
 
     while(1){
-    	int choice = admin_menu();
+    	int choice = admin_menu(); 		//show admin menu
     	myflush();
 	if(choice == 5){
-		send(sock, "EXIT", 4, 0);
+		send(sock, encrypt_string("EXIT"), 4, 0);
 		valread = read(sock, buffer, BUFFER_LENGTH);
 	 	
 		close(sock);
@@ -64,7 +64,7 @@ int main()
 	int ch = create_command_helper(command, choice);
 
  	if(ch == 0){
-		send(sock, "EXIT", 4, 0);
+		send(sock, encrypt_string("EXIT"), 4, 0);
 		valread = read(sock, buffer, BUFFER_LENGTH);
 		
 		close(sock);

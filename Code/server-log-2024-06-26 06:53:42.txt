@@ -1,0 +1,53 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 06:53:42
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+F 400 1
+[DEBUG] Sent the following response to the client: 
+hBVRRBS,
+[INFO] Buffer: UPD_USER 300 NA 1 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Registration status for '300' has been updated to 'REGISTERED'
+[INFO] Sent the following response to the client: 
+[SERVER] Registration status for '300' has been updated to 'REGISTERED'
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BItgikuvgtgfI,
+[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,
+[INFO] Buffer: UPD_USER 300 NA 0 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Registration status for '300' has been updated to 'UNREGISTERED'
+[INFO] Sent the following response to the client: 
+[SERVER] Registration status for '300' has been updated to 'UNREGISTERED'
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIwptgikuvgtgfI,
+[INFO] Buffer: AUTH_USER 300 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,
+[INFO] Buffer: UPD_USER 300 400 -1 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Forwarding number for '300' has been updated to '400'
+[INFO] Sent the following response to the client: 
+[SERVER] Forwarding number for '300' has been updated to '400'
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBh‘”™ƒ”†‹‰B—„‡”Bˆ‘”BIURRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIVRRI,
+[INFO] Buffer: CFS_CODE 400
+[INFO] Request recieved to retrieve code for user forwarding data of '400'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

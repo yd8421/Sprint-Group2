@@ -1,0 +1,43 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 06:44:21
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: CFS_CODE 100
+[INFO] Request recieved to retrieve code for user forwarding data of '100'
+[INFO] Sent the following response to the client: 
+NF
+[DEBUG] Sent the following response to the client: 
+ph,[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+NF
+[DEBUG] Sent the following response to the client: 
+ph,[INFO] Buffer: UPD_USER 300 NA 1 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Sent the following response to the client: 
+NF
+[DEBUG] Sent the following response to the client: 
+ph,[INFO] Buffer: AUTH_USER 300 passOSBq
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjÅkpx,[INFO] Buffer: AUTH_USER 300 pass1udì
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjÅkpx,[INFO] Buffer: AUTH_USER 300 passSóÜµ
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjÅkpx,[INFO] Buffer: gzkv
+[WARN] Unknown command received from client: gzkv
+[INFO] Sent the following response to the client: 
+AUTH_INV
+[DEBUG] Sent the following response to the client: 
+cwvjÅkpx,[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

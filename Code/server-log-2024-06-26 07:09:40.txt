@@ -1,0 +1,143 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 07:09:40
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: VIEW_USER
+[INFO] Request recieved to view user forwarding data
+[INFO] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+20001         | 2004         | 1           | 1           | 3        
+2001          | 2002         | 1           | 1           | 1        
+2004          | 3004         | 1           | 1           | 2        
+1000          | 2001         | 1           | 1           | 3        
+500000        | 50000        | 1           | 1           | 0        
+2             | 3            | 1           | 1           | 3        
+3000          | 22222        | 1           | 1           | 1        
+3333333       | 22222        | 1           | 0           | 3        
+0000111111    | 3000001111   | 1           | 1           | 1        
+300           | 400          | 0           | 0           | 1        
+9898989898    | 7979797979   | 1           | 0           | 2        
+11            | 54           | 1           | 1           | 3        
+2000011111    | 23           | 1           | 1           | 1        
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,TRRRSBBBBBBBBBBTRRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRSBBBBBBBBBBBTRRTBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,TRRVBBBBBBBBBBBURRVBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,SRRRBBBBBBBBBBBTRRSBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,WRRRRRBBBBBBBBBWRRRRBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,TBBBBBBBBBBBBBBUBBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,URRRBBBBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,UUUUUUUBBBBBBBBTTTTTBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,RRRRSSSSSSBBBBBURRRRRSSSSBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,URRBBBBBBBBBBBBVRRBBBBBBBBBBBRBBBBBBBBBBBBRBBBBBBBBBBBBSBBBBBBBB,[Z[Z[Z[Z[ZBBBBBY[Y[Y[Y[Y[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBTBBBBBBBB,SSBBBBBBBBBBBBBWVBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBUBBBBBBBB,TRRRRSSSSSBBBBBTUBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,
+[INFO] Buffer: ADD_USER 45 1 1 1 U
+[INFO] Request recieved to add user '45'
+[INFO] Sent the following response to the client: 
+[SERVER] User info '45' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BIVWIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[INFO] Buffer: CFS_CODE 11
+[INFO] Request recieved to retrieve code for user forwarding data of '11'
+[INFO] Sent the following response to the client: 
+F 54 3
+[DEBUG] Sent the following response to the client: 
+hBWVBU,
+[INFO] Buffer: CFS_CODE 20
+[INFO] Request recieved to retrieve code for user forwarding data of '20'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[INFO] Buffer: ADD_LOGIN 20 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[SERVER] User login info '20' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‘‰‹B‹ˆ‘BITRIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+[INFO] Buffer: ADD_USER 20 21 1 1 N
+[INFO] Request recieved to add user '20'
+[INFO] Sent the following response to the client: 
+[SERVER] User info '20' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BITRIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+[INFO] Buffer: AUTH_USER 20 pass
+[INFO] Request recieved to authenticate user
+[INFO] Sent the following response to the client: 
+AUTH_SUCCESS
+[DEBUG] Sent the following response to the client: 
+cwvjuweeguu,
+[INFO] Buffer: UPD_USER 20 NA 0 -1 O
+[INFO] Request recieved to update user forwarding data
+[INFO] Registration status for '20' has been updated to 'UNREGISTERED'
+[INFO] Sent the following response to the client: 
+[SERVER] Registration status for '20' has been updated to 'UNREGISTERED'
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BITRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIwptgikuvgtgfI,
+[INFO] Buffer: gzkv
+[WARN] Unknown command received from client: gzkv
+[INFO] Sent the following response to the client: 
+[SERVER] Registration status for '20' has been updated to 'UNREGISTERED'
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BITRIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIwptgikuvgtgfI,
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 31
+[INFO] Request recieved to retrieve code for user forwarding data of '31'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[INFO] Buffer: ADD_LOGIN 31 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[SERVER] User login info '31' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‘‰‹B‹ˆ‘BIUSIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+[INFO] Buffer: ADD_USER 31 42 1 1 U
+[INFO] Request recieved to add user '31'
+[INFO] Sent the following response to the client: 
+[SERVER] User info '31' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BIUSIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+[INFO] Buffer: gzkv
+[WARN] Unknown command received from client: gzkv
+[INFO] Sent the following response to the client: 
+[SERVER] User info '31' has been added to the database
+[DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BIUSIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[INFO] Buffer: ADD_LOGIN 300 pass
+[INFO] Request recieved to add login
+[INFO] Sent the following response to the client: 
+[ERROR] User '300' is already registered to the CFS
+[DEBUG] Sent the following response to the client: 
+}gttqtBw•‡”BIURRIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,
+[INFO] Buffer: gzkv
+[WARN] Unknown command received from client: gzkv
+[INFO] Sent the following response to the client: 
+[ERROR] User '300' is already registered to the CFS
+[DEBUG] Sent the following response to the client: 
+}gttqtBw•‡”BIURRIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,
+[ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

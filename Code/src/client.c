@@ -52,7 +52,7 @@ int main(){
 				
 			send_recv_query(client_fd, command, buffer);
 			
-			if(strcmp(buffer, "NF\n") == 0){
+			if(strcmp(buffer, "NF\n") == 0 || strcmp(buffer, "UR\n") == 0){
 		//		system("clear");
 				printf("Calling number: %s\n\n", call_no);
 		
@@ -71,23 +71,64 @@ int main(){
 					printf("The number you called is BUSY\n\n");
 				}
 				else{
+					sleep(3);
 					printf("The number is NOT RESPONDING\n\n");
 				}
 			
 			}
 		}
 		else if(choice == 2){
-		
+			
+			check(command);
+			
+			send_recv_query(client_fd, command, buffer);
+			
+			if(buffer[0] == 'F' || buffer[0] == 'N' ){
+				
+				printf("\nWe are registrating you with your previous settings\n");
+				
+				memset(command, '\0', sizeof(command));	
+				memset(buffer, '\0', sizeof(command));	
+				
+				char comm[11] = "NA 1 -1 O";
+
+				strcpy(command, "UPD_USER ");
+				int i = 9;
+
+				for(int j=0; j<strlen(user_no); j++){
+					command[i++] = user_no[j];
+				}
+				command[i++] = ' ';
+
+				for(int j=0; j<strlen(comm); j++){
+					command[i++] = comm[j];
+				}
+
+				send_recv_query(client_fd, command, buffer);
+				
+				memset(command, '\0', sizeof(command));	
+				memset(buffer, '\0', sizeof(command));	
+				
+				printf("\nPress ENTER KEY to continue: ");
+				myflush();
+				
+				continue;	
+			}
+
+			memset(command, '\0', sizeof(command));	
+			memset(buffer, '\0', sizeof(command));	
+
 			register_user_pass(command);
 		
 			send_recv_query(client_fd, command, buffer);
 
 			char* token = strtok(buffer, " ");
-			printf("Login from the Main Menu\n");
 
 			memset(command, '\0', sizeof(command));
 
 			if(strcmp(token, "[ERROR]") == 0){
+			 	
+				printf("\nUser already Registered\nLogin from the Main Menu\n");
 				
 				printf("\nPress ENTER KEY to continue: ");
 				memset(buffer, '\0', sizeof(buffer));
@@ -101,6 +142,7 @@ int main(){
 			register_user(command);
 	
 			send_recv_query(client_fd, command, buffer);
+			myflush();
 
 		}
 		else if(choice == 3){
@@ -148,7 +190,7 @@ int main(){
 
 			if(ch == 6){
 			
-				send_recv_query(client_fd, "EXIT",  buffer);
+				send_recv_query(client_fd, encrypt_string("EXIT"),  buffer);
 				close(client_fd);
 				return 0;
 			}
@@ -159,7 +201,7 @@ int main(){
 
 		}
 		else{
-			send_recv_query(client_fd, "EXIT",  buffer);
+			send_recv_query(client_fd, encrypt_string("EXIT"),  buffer);
 			close(client_fd);
 			return 0;
 		}
