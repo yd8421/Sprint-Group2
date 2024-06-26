@@ -704,6 +704,7 @@ int handle_client(int client_socket, const char* logFileName) {
     if(strcmp(buffer, "EXIT") == 0)
     {
         send(client_socket, "EXIT", strlen("EXIT"), 0);
+        fclose(logger);
         return 1;
     }
 
