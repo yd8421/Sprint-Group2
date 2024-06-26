@@ -7,8 +7,10 @@ sqlite3* g_db;
 void interrupt_handler(int sig)
 {
     signal(sig, SIG_IGN);
-    printf("[INFO] Interrupt occured: Closing server\n");
-    printf("[INFO] Closing SQLite database connection\n");
+    char* currentTime = get_current_time();
+    printf("%s [INFO] Interrupt occured: Closing server\n", currentTime);
+    printf("%s [INFO] Closing SQLite database connection\n", currentTime);
+    free(currentTime);
     close_database();
     exit(0);
 }
@@ -24,7 +26,7 @@ char* get_current_time() {
 
     buffer = (char*)malloc(20 * sizeof(char));
     if (buffer == NULL) {
-        perror("Failed to allocate memory");
+        perror("[ERROR] Failed to allocate memory to get current time");
         return NULL;
     }
 
@@ -76,7 +78,9 @@ char* decrypt_string(const char* string)
 
 // Function to handle SQLite errors
 void handle_error(sqlite3* g_db) {
-    fprintf(stderr, "[ERROR] SQLite error: %s\n", sqlite3_errmsg(g_db));
+    char* currentTime = get_current_time();
+    fprintf(stderr, "%s [ERROR] SQLite error: %s\n", currentTime, sqlite3_errmsg(g_db));
+    free(currentTime);
     sqlite3_close(g_db);
 }
 
@@ -84,7 +88,9 @@ void handle_error(sqlite3* g_db) {
 int open_database() {
     int returnCode = sqlite3_open("cfs_data.db", &g_db);
     if (returnCode != SQLITE_OK) {
-        fprintf(stderr, "[ERROR] Cannot open database: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Cannot open database: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sqlite3_close(g_db);
         return 1;
     }
@@ -93,17 +99,20 @@ int open_database() {
     const char *init_table1 = "CREATE TABLE IF NOT EXISTS forwardinfo (clientNumber TEXT PRIMARY KEY,forwardNumber TEXT,isRegistered INTEGER,isActivated INTEGER,forwardType INTEGER);";
     returnCode = sqlite3_exec(g_db, init_table1, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
+        char* currentTime = get_current_time();
         // Log this section under ERROR
-        fprintf(stderr, "[FATAL] Failed to create table: %s\n", sqlite3_errmsg(g_db));
+        fprintf(stderr, "%s [FATAL] Failed to create table: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         return 1;
     }
 
     const char *init_table2 = "CREATE TABLE IF NOT EXISTS authinfo (clientNumber TEXT PRIMARY KEY,passkey TEXT);";
     returnCode = sqlite3_exec(g_db, init_table2, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
+        char* currentTime = get_current_time();
         // Log this section under ERROR
-        fprintf(stderr, "[FATAL] Failed to create table: %s\n", sqlite3_errmsg(g_db));
-        sqlite3_free(zErrMsg);
+        fprintf(stderr, "%s [FATAL] Failed to create table: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         return 1;
     }
     return 0;
@@ -129,24 +138,30 @@ char* add_login_details(const char* userId, const char* password)
   returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
   if( returnCode == SQLITE_CONSTRAINT){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] User '%s' is already registered to the CFS\n", userId);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] User '%s' is already registered to the CFS\n", currentTime, userId);
         sprintf(responseData, "[ERROR] User '%s' is already registered to the CFS\n", userId);
+        free(currentTime);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
     }
     if ( returnCode ) {
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Error occured while adding user '%s'\n", userId);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Error occured while adding user '%s'\n", currentTime, userId);
         sprintf(responseData, "[ERROR] Error occured while adding user '%s'\n", userId);
+        free(currentTime);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
     }
     else {
         // Message: Client info has been added to the database
-        printf("[INFO] User login info '%s' has been added to the database\n", userId);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] User login info '%s' has been added to the database\n", currentTime, userId);
         sprintf(responseData, "[SERVER] User login info '%s' has been added to the database\n", userId);
+        free(currentTime);
         return responseData;
     }
 }
@@ -168,24 +183,30 @@ char* add_user_data(const char* clientNumber, const char* forwardingNumber, int 
     returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
     if( returnCode == SQLITE_CONSTRAINT){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] User '%s' already exist!\n", clientNumber);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] User '%s' already exist!\n", currentTime, clientNumber);
         sprintf(responseData, "[ERROR] User '%s' already exist!\n", clientNumber);
+        free(currentTime);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
     }
     if ( returnCode ) {
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Error occured while adding user '%s'\n", clientNumber);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Error occured while adding user '%s'\n", currentTime, clientNumber);
         sprintf(responseData, "[ERROR] Error occured while adding user '%s'\n", clientNumber);
+        free(currentTime);
         //fprintf(stderr, "Failed to log user information, CODE %d: %s\n", returnCode, sqlite3_errmsg(g_db));
         sqlite3_free(zErrMsg);
         return responseData;
     }
     else {
         // Message: Client info has been added to the database
-        printf("[INFO] User info '%s' has been added to the database\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] User info '%s' has been added to the database\n", currentTime, clientNumber);
         sprintf(responseData, "[SERVER] User info '%s' has been added to the database\n", clientNumber);
+        free(currentTime);
         return responseData;
     }
 }
@@ -198,10 +219,14 @@ void delete_login_details(const char* userId) {
     char* errMsg = 0;
     int returnCode = sqlite3_exec(g_db, sql_query, NULL, 0, &errMsg);
     if (returnCode != SQLITE_OK) {
-        fprintf(stderr, "[ERROR] SQL error: %s\n", errMsg);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] SQL error: %s\n", currentTime, errMsg);
+        free(currentTime);
         sqlite3_free(errMsg);
     } else {
-        printf("[INFO] Deleted login details successfully.\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Deleted login details successfully.\n", currentTime);
+        free(currentTime);
     }
 }
 
@@ -213,10 +238,14 @@ void delete_user_data(const char* client_number) {
     char* errMsg = 0;
     int returnCode = sqlite3_exec(g_db, sql_query, NULL, 0, &errMsg);
     if (returnCode != SQLITE_OK) {
-        fprintf(stderr, "[ERROR] SQL error: %s\n", errMsg);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] SQL error: %s\n", currentTime, errMsg);
+        free(currentTime);
         sqlite3_free(errMsg);
     } else {
-        printf("[INFO] Deleted user data successfully.\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Deleted user data successfully.\n", currentTime);
+        free(currentTime);
     }
 }
 
@@ -230,8 +259,10 @@ char* view_auth_table() {
     sqlite3_stmt* stmt;
     int returnCode = sqlite3_prepare_v2(g_db, sql_query, -1, &stmt, NULL);
     if (returnCode != SQLITE_OK) {
-        fprintf(stderr, "[ERROR] SQL error: %s\n", errMsg);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] SQL error: %s\n", currentTime, errMsg);
         sprintf(response_data, "[SERVER] SQL error: %s\n", errMsg);
+        free(currentTime);
         sqlite3_free(errMsg);
         return response_data;
     }
@@ -241,7 +272,9 @@ char* view_auth_table() {
     while ((returnCode = sqlite3_step(stmt)) == SQLITE_ROW) {
         if(tableHeaderStatus == 0)
         {
-            printf("[INFO] Records from the authentication table:\n");
+            char* currentTime = get_current_time();
+            printf("%s [INFO] Records from the authentication table:\n", currentTime);
+            free(currentTime);
             //printf("Client Number (User ID)\t| Password\t\n");
             printf("%-10s | %-10s\n", "Client Number", "Password");
             printf("----------------------------------\n");
@@ -269,8 +302,10 @@ char* view_forwarding_table() {
     sqlite3_stmt* stmt;
     int returnCode = sqlite3_prepare_v2(g_db, sql_query, -1, &stmt, NULL);
     if (returnCode != SQLITE_OK) {
-        fprintf(stderr, "[ERROR] SQL error: %s\n", errMsg);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] SQL error: %s\n", currentTime, errMsg);
         sprintf(response_data, "[SERVER] SQL error: %s\n", errMsg);
+        free(currentTime);
         sqlite3_free(errMsg);
         return response_data;
     }
@@ -280,7 +315,9 @@ char* view_forwarding_table() {
     while ((returnCode = sqlite3_step(stmt)) == SQLITE_ROW) {
         if(tableHeaderStatus == 0)
         {
-            printf("[INFO] Records from the forwarding table:\n");
+            char* currentTime = get_current_time();
+            printf("%s [INFO] Records from the forwarding table:\n", currentTime);
+            free(currentTime);
             printf("%-10s | %-10s | %-5s | %-5s | %-5s\n", "Client Number", "Forw. Number", "Reg. Status", "Act. Status", "Forw. Type");
             //printf("Client Number \t| Forwarding Number \t| Registration \t| Activation \t| Forwarding Type\t\n");
             printf("-----------------------------------------------------------------------\n");
@@ -304,8 +341,10 @@ char* view_forwarding_table() {
     }
     
     if (tableHeaderStatus == 0){
-        printf("[INFO] There are no records in the forwarding table\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] There are no records in the forwarding table\n", currentTime);
         sprintf(response_data, "[SERVER] There are no records in the forwarding table\n");
+        free(currentTime);
     }
 
     sqlite3_finalize(stmt);
@@ -327,8 +366,10 @@ char* validate_auth_info(const char* clientNumber, const char* password)
 
     //printf("[DEBUG] Prepared String: %s\n", sql_query);
     if (sqlite3_prepare_v2(g_db, sql_query, -1, &res, NULL) != SQLITE_OK) {
-        printf("[ERROR] Can't validate login data: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        printf("%s [ERROR] Can't validate login data: %s\n", currentTime, sqlite3_errmsg(g_db));
         sprintf(responseData, "AUTH_FAILURE\n");
+        free(currentTime);
         sqlite3_free(errMsg);
         return responseData;
     }
@@ -338,12 +379,16 @@ char* validate_auth_info(const char* clientNumber, const char* password)
     }
 
     if(strcmp(password, resp_password) == 0){
-        printf("[INFO] User '%s' had been authenticated\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] User '%s' had been authenticated\n", currentTime, clientNumber);
+        free(currentTime);
         sprintf(responseData, "AUTH_SUCCESS\n");
         return responseData;
     }
     else{
-        printf("[WARN] User '%s' has entered an invalid password.\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [WARN] User '%s' has entered an invalid password.\n", currentTime, clientNumber);
+        free(currentTime);
         sprintf(responseData, "AUTH_INV\n");
         return responseData;
     }
@@ -365,7 +410,9 @@ char* view_cfs_status(const char* clientNumber)
 
     //printf("[DEBUG] Prepared String: %s\n", sql_query);
     if (sqlite3_prepare_v2(g_db, sql_query, -1, &res, NULL) != SQLITE_OK) {
-        printf("[ERROR] Can't retrieve data: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        printf("%s [ERROR] Can't retrieve data: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sprintf(responseData, "[SERVER] SQL error: %s\n", errMsg);
         sqlite3_free(errMsg);
         return responseData;
@@ -393,35 +440,41 @@ char* view_cfs_status(const char* clientNumber)
     }
     //printf("Statusflag: %d\n", statusFlag);
 
+    char* currentTime = get_current_time();
     switch(statusFlag1)
     {
-        case 0: printf("[INFO] User has not registered for CFS\n");
+        case 0: printf("%s [INFO] User has not registered for CFS\n", currentTime);
                 sprintf(responseData, "[SERVER] User has not registered for CFS\n");
                 break;
-        case 1: printf("[INFO] User has registered for CFS\n");
+        case 1: printf("%s [INFO] User has registered for CFS\n", currentTime);
                 sprintf(responseData, "[SERVER] User has registered for CFS\n");
                 break;
     }
     switch(statusFlag2)
     {
-        case 0: printf("[INFO] User has not activated CFS\n");
+        case 0: printf("%s [INFO] User has not activated CFS\n", currentTime);
                 sprintf(responseData, "[SERVER] User has not activated CFS\n");
                 break;
-        case 1: printf("[INFO] User has activated CFS\n");
+        case 1: printf("%s [INFO] User has activated CFS\n", currentTime);
                 sprintf(responseData, "[SERVER] User has activated CFS\n");
                 break;
     }
+    free(currentTime);
 
     if(statusFlag1 == 0)
     {
-        printf("[INFO] Call will be connected to %s\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Call will be connected to %s\n", currentTime, clientNumber);
+        free(currentTime);
         sprintf(responseData + strlen(responseData), "Call will be connected to %s\n", clientNumber);
         return responseData;
     }
 
     if(statusFlag1 != 1 && statusFlag2 != 1)
     {
-        printf("[INFO] Call will be connected to %s\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Call will be connected to %s\n", currentTime, clientNumber);
+        free(currentTime);
         sprintf(responseData + strlen(responseData), "Call will be connected to %s\n", clientNumber);
         return responseData;
     }
@@ -431,7 +484,9 @@ char* view_cfs_status(const char* clientNumber)
 
     //printf("[DEBUG] Prepared String: %s\n", sql_query);
     if (sqlite3_prepare_v2(g_db, sql_query, -1, &res, NULL) != SQLITE_OK) {
-        printf("[ERROR] Can't retrieve data: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        printf("%s [ERROR] Can't retrieve data: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sprintf(responseData, "[SERVER] SQL error: %s\n", errMsg);
         sqlite3_free(errMsg);
         return responseData;
@@ -440,26 +495,32 @@ char* view_cfs_status(const char* clientNumber)
     while (sqlite3_step(res) == SQLITE_ROW) {
     strcpy(forwardNumber,sqlite3_column_text(res, 0));
     }
+
+    currentTime = get_current_time();
     switch(forwType)
     {
-    case 0: printf("[INFO] Forward Type: Not Set\n");
-            printf("[INFO] Call will be connected to %s\n", clientNumber);
+    case 0: printf("%s [INFO] Forward Type: Not Set\n", currentTime);
+            printf("%s [INFO] Call will be connected to %s\n", currentTime, clientNumber);
 
             sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: Not Set\n");
             sprintf(responseData + strlen(responseData), "[SERVER] Call will be connected to %s\n", clientNumber);
             return responseData;
             break;
-    case 1: printf("[INFO] Forward Type: Unconditional\n");
+    case 1: printf("%s [INFO] Forward Type: Unconditional\n", currentTime);
             sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: Unconditional\n");
             break;
-    case 2: printf("[INFO] Forward Type: Busy\n");
+    case 2: printf("%s [INFO] Forward Type: Busy\n", currentTime);
             sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: Busy\n");
             break;
-    case 3: printf("[INFO] Forward Type: No Reply\n");
+    case 3: printf("%s [INFO] Forward Type: No Reply\n", currentTime);
             sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: No Reply\n");
             break;
     }
-    printf("[INFO] Call will be forwarded to %s\n", forwardNumber);
+    free(currentTime);
+
+    currentTime = get_current_time();
+    printf("%s [INFO] Call will be forwarded to %s\n", currentTime, forwardNumber);
+    free(currentTime);
     sprintf(responseData + strlen(responseData), "[SERVER] Call will be forwarded to %s\n", forwardNumber);
 
     return responseData;
@@ -488,7 +549,9 @@ char* view_cfs_code(const char* clientNumber)
 
     //printf("[DEBUG] Prepared String: %s\n", sql_query);
     if (sqlite3_prepare_v2(g_db, sql_query, -1, &res, NULL) != SQLITE_OK) {
-        printf("[ERROR] Can't retrieve data: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        printf("%s [ERROR] Can't retrieve data: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         //sprintf(responseData, "[SERVER] SQL error: %s\n", errMsg);
         sprintf(responseData, "ERROR\n");
         sqlite3_free(errMsg);
@@ -517,35 +580,40 @@ char* view_cfs_code(const char* clientNumber)
     }
     //printf("Statusflag: %d\n", statusFlag);
 
+    char* currentTime = get_current_time();
     switch(statusFlag1)
     {
-        case 0: printf("[INFO] User has not registered for CFS\n");
+        case 0: printf("%s [INFO] User has not registered for CFS\n", currentTime);
                 //sprintf(responseData, "[SERVER] User has not registered for CFS\n");
                 break;
-        case 1: printf("[INFO] User has registered for CFS\n");
+        case 1: printf("%s [INFO] User has registered for CFS\n", currentTime);
                 //sprintf(responseData, "[SERVER] User has not registered for CFS\n");
                 break;
     }
     switch(statusFlag2)
     {
-        case 0: printf("[INFO] User has not activated CFS\n");
+        case 0: printf("%s [INFO] User has not activated CFS\n", currentTime);
                 //sprintf(responseData, "[SERVER] User has not activated CFS\n");
                 break;
-        case 1: printf("[INFO] User has activated CFS\n");
+        case 1: printf("%s [INFO] User has activated CFS\n", currentTime);
                 //sprintf(responseData, "[SERVER] User has activated CFS\n");
                 break;
     }
 
     if(statusFlag1 == 0)
     {
-        printf("[INFO] Call will be connected to %s\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Call will be connected to %s\n", currentTime, clientNumber);
+        free(currentTime);
         sprintf(responseData + strlen(responseData), "UR\n");
         return responseData;
     }
 
     if(statusFlag1 != 1 && statusFlag2 != 1)
     {
-        printf("[INFO] Call will be connected to %s\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Call will be connected to %s\n", currentTime, clientNumber);
+        free(currentTime);
         sprintf(responseData + strlen(responseData), "NF\n");
         return responseData;
     }
@@ -555,7 +623,9 @@ char* view_cfs_code(const char* clientNumber)
 
     //printf("[DEBUG] Prepared String: %s\n", sql_query);
     if (sqlite3_prepare_v2(g_db, sql_query, -1, &res, NULL) != SQLITE_OK) {
-        printf("[ERROR] Can't retrieve data: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        printf("%s [ERROR] Can't retrieve data: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         //sprintf(responseData, "[SERVER] SQL error: %s\n", errMsg);
         sprintf(responseData, "ERROR\n");
         sqlite3_free(errMsg);
@@ -565,28 +635,34 @@ char* view_cfs_code(const char* clientNumber)
     while (sqlite3_step(res) == SQLITE_ROW) {
     strcpy(forwardNumber,sqlite3_column_text(res, 0));
     }
+
+    currentTime = get_current_time();
     switch(forwType)
     {
-    case 0: printf("[INFO] Forward Type: Not Set\n");
-            printf("[INFO] Call will be connected to %s\n", clientNumber);
+    case 0: printf("%s [INFO] Forward Type: Not Set\n", currentTime);
+            printf("%s [INFO] Call will be connected to %s\n", currentTime, clientNumber);
 
             sprintf(responseData + strlen(responseData), "NF\n");
             return responseData;
             break;
-    case 1: printf("[INFO] Forward Type: Unconditional\n");
+    case 1: printf("%s [INFO] Forward Type: Unconditional\n", currentTime);
             //sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: Unconditional\n");
             sprintf(responseData, "F %s 1\n", forwardNumber);
             break;
-    case 2: printf("[INFO] Forward Type: Busy\n");
+    case 2: printf("%s [INFO] Forward Type: Busy\n", currentTime);
             //sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: Busy\n");
             sprintf(responseData, "F %s 2\n", forwardNumber);
             break;
-    case 3: printf("[INFO] Forward Type: No Reply\n");
+    case 3: printf("%s [INFO] Forward Type: No Reply\n", currentTime);
             //sprintf(responseData + strlen(responseData), "[SERVER] Forward Type: No Reply\n");
             sprintf(responseData, "F %s 3\n", forwardNumber);
             break;
     }
-    printf("[INFO] Call will be forwarded to %s\n", forwardNumber);
+    free(currentTime);
+
+    currentTime = get_current_time();
+    printf("%s [INFO] Call will be forwarded to %s\n", currentTime, forwardNumber);
+    free(currentTime);
 
     return responseData;
 }
@@ -604,7 +680,9 @@ int update_forwarding_number(const char* clientNumber, const char* forwardingNum
     returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Failed to update forwarding number: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Failed to update forwarding number: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sqlite3_free(zErrMsg);
         return 1;
     }
@@ -625,7 +703,9 @@ int update_registration_status(const char* clientNumber, int isRegistered)
     returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Failed to update registration status: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Failed to update registration status: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sqlite3_free(zErrMsg);
         return 1;
     }
@@ -646,7 +726,9 @@ int update_activation_status(const char* clientNumber, int isActivated)
     returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Failed to activate call forwarding: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Failed to activate call forwarding: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sqlite3_free(zErrMsg);
         return 1;
     }
@@ -667,7 +749,9 @@ int update_forwarding_type(const char* clientNumber, int forwardingType)
     returnCode = sqlite3_exec(g_db, sql_query, sql_select_callback, 0, &zErrMsg);
     if( returnCode ){
         // Log this section under ERROR
-        fprintf(stderr, "[ERROR] Failed to update forwarding type: %s\n", sqlite3_errmsg(g_db));
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [ERROR] Failed to update forwarding type: %s\n", currentTime, sqlite3_errmsg(g_db));
+        free(currentTime);
         sqlite3_free(zErrMsg);
         return 1;
     }
@@ -691,17 +775,21 @@ int handle_client(int client_socket, const char* logFileName) {
     
     valread = read(client_socket, buffer, 1024);
     if (valread <= 0) {
-        sprintf(logMsg, "[ERROR] Error reading from client\n");
+        char* currentTime = get_current_time();
+        sprintf(logMsg, "%s [ERROR] Error reading from client\n", currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
-        fprintf(stderr, "[ERROR] Error reading from client\n");
+        fprintf(stderr, "%s [ERROR] Error reading from client\n", currentTime);
+        free(currentTime);
         fclose(logger);
         return 1;
     }
     
-    printf("[DEBUG] Buffer before decryption: %s\n", buffer);
+    char* currentTime = get_current_time();
+    printf("%s [DEBUG] Buffer before decryption: %s\n", currentTime, buffer);
     char* decr_buffer = decrypt_string(buffer);
     strcpy(buffer, decr_buffer);
-    printf("[DEBUG] Buffer after decryption: %s\n", buffer);
+    printf("%s [DEBUG] Buffer after decryption: %s\n", currentTime, buffer);
+    free(currentTime);
     free(decr_buffer);
     if(strcmp(buffer, "EXIT") == 0)
     {
@@ -710,9 +798,12 @@ int handle_client(int client_socket, const char* logFileName) {
         return 1;
     }
 
-    printf("[INFO] Buffer: %s\n", buffer);
-    sprintf(logMsg, "[INFO] Buffer: %s\n", buffer);
+    currentTime = get_current_time();
+    printf("%s [INFO] Buffer: %s\n", currentTime, buffer);
+    sprintf(logMsg, "%s [INFO] Buffer: %s\n", currentTime, buffer);
+    free(currentTime);
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+    
 
     // It handles these requests
     // ADD_LOGIN    - Add login info for the client number to access CFS system
@@ -732,9 +823,11 @@ int handle_client(int client_socket, const char* logFileName) {
     // ADD_LOGIN    - Add login info for the client number to access CFS system
     if (strcmp(token_params, "ADD_LOGIN") == 0) {
         // Example: add_login_details(g_db, "user1", "password1");
-        printf("[INFO] Request recieved to add login\n");
-        sprintf(logMsg, "[INFO] Request recieved to add login\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to add login\n", currentTime);
+        sprintf(logMsg, "%s [INFO] Request recieved to add login\n", currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+        free(currentTime);
 
         const char* userId = strtok(NULL, " ");
         const char* password = strtok(NULL, " ");
@@ -770,9 +863,11 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // DEL_USER     - Delete the user details (login + user) from the CFS system
     else if (strcmp(token_params, "DEL_USER") == 0) {
-        printf("[INFO] Request recieved to delete user info\n");
-        sprintf(logMsg, "[INFO] Request recieved to delete user info\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to delete user info\n", currentTime);
+        sprintf(logMsg, "%s [INFO] Request recieved to delete user info\n", currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+        free(currentTime);
 
         char* userId = strtok(NULL, " ");
 
@@ -798,8 +893,10 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // VIEW_LOGIN   - View the auth table for all the users in the CFS system
     else if (strcmp(token_params, "VIEW_LOGIN") == 0) {
-        printf("[INFO] Request recieved to view login data\n");
-        sprintf(logMsg, "[INFO] Request recieved to view login data\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to view login data\n", currentTime);
+        sprintf(logMsg, "%s [INFO] Request recieved to view login data\n", currentTime);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         char *table_data = view_auth_table();
@@ -809,8 +906,10 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // VIEW_USER    - View the forwarding table of the CFS system
     else if (strcmp(token_params, "VIEW_USER") == 0) {
-        printf("[INFO] Request recieved to view user forwarding data\n");
-        sprintf(logMsg, "[INFO] Request recieved to view user forwarding data\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to view user forwarding data\n", currentTime);
+        sprintf(logMsg, "%s [INFO] Request recieved to view user forwarding data\n", currentTime);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         char *table_data = view_forwarding_table();
@@ -822,8 +921,10 @@ int handle_client(int client_socket, const char* logFileName) {
     else if (strcmp(token_params, "AUTH_USER") == 0) {
         char* clientNumber = strtok(NULL, " ");
         char* password = strtok(NULL, " ");
-        printf("[INFO] Request recieved to authenticate user\n");
-        sprintf(logMsg, "[INFO] Request recieved to authenticate user\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to authenticate user\n", currentTime);
+        sprintf(logMsg, "%s [INFO] Request recieved to authenticate user\n", currentTime);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         strcpy(response_message, validate_auth_info(clientNumber, password));
@@ -832,8 +933,10 @@ int handle_client(int client_socket, const char* logFileName) {
     // CFS_STATUS   - Check the call forwarding status for a client number
     else if (strcmp(token_params, "CFS_STATUS") == 0) {
         char* clientNumber = strtok(NULL, " ");
-        printf("[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);
-        sprintf(logMsg, "[INFO] Request recieved to view user forwarding data of '%s'\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to view user forwarding data of '%s'\n", currentTime, clientNumber);
+        sprintf(logMsg, "%s [INFO] Request recieved to view user forwarding data of '%s'\n", currentTime, clientNumber);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         strcpy(response_message, view_cfs_status(clientNumber));
@@ -843,8 +946,10 @@ int handle_client(int client_socket, const char* logFileName) {
     // CFS_CODE     - For client: Check the call forwarding status for a client number to simulate a phone call
     else if (strcmp(token_params, "CFS_CODE") == 0) {
         char* clientNumber = strtok(NULL, " ");
-        printf("[INFO] Request recieved to retrieve code for user forwarding data of '%s'\n", clientNumber);
-        sprintf(logMsg, "[INFO] Request recieved to retrieve code for user forwarding data of '%s'\n", clientNumber);
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Call: Request recieved to retrieve code for user forwarding data of '%s'\n", currentTime, clientNumber);
+        sprintf(logMsg, "%s [INFO] Call: Request recieved to retrieve code for user forwarding data of '%s'\n", currentTime, clientNumber);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         strcpy(response_message, view_cfs_code(clientNumber));
@@ -854,8 +959,10 @@ int handle_client(int client_socket, const char* logFileName) {
     // UPD_USER     - Update forwarding details for the client number in the CFS system
     else if (strcmp(token_params, "UPD_USER") == 0) {
         memset(response_message, '\0', sizeof(response_message));
-        printf("[INFO] Request recieved to update user forwarding data\n");
-        sprintf(logMsg, "[INFO] Request recieved to update user forwarding data\n");
+        char* currentTime = get_current_time();
+        printf("%s [INFO] Request recieved to update user forwarding data\n", currentTime);
+        sprintf(logMsg, "%s [INFO] Request recieved to update user forwarding data\n", currentTime);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
 
         char* clientNumber = strtok(NULL, " ");
@@ -959,8 +1066,10 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // <unknown-req> - else condition: for unknown commmands from the client/admin program
     else {
-        fprintf(stderr, "[WARN] Unknown command received from client: %s\n", buffer);
-        sprintf(logMsg, "[WARN] Unknown command received from client: %s\n", buffer);
+        char* currentTime = get_current_time();
+        fprintf(stderr, "%s [WARN] Unknown command received from client: %s\n", currentTime, buffer);
+        sprintf(logMsg, "%s [WARN] Unknown command received from client: %s\n", currentTime, buffer);
+        free(currentTime);
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     }
 
@@ -974,13 +1083,16 @@ int handle_client(int client_socket, const char* logFileName) {
     char* encr_response_message = encrypt_string(response_message);
     send(client_socket, encr_response_message, strlen(response_message), 0);
 
-    sprintf(logMsg, "[INFO] Sent the following response to the client: \n");
+    currentTime = get_current_time();
+    sprintf(logMsg, "%s [DEBUG] Sent the following response to the client: \n", currentTime);
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     fwrite(response_message, sizeof(char), strlen(response_message), logger);
 
-    sprintf(logMsg, "[DEBUG] Sent the following response to the client: \n");
+    sprintf(logMsg, "%s [DEBUG] Sent the following response to the client: \n", currentTime);
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
     fwrite(encr_response_message, sizeof(char), strlen(encr_response_message), logger);
+
+    free(currentTime);
 
     sprintf(logMsg, "\n");
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
