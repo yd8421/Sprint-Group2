@@ -836,6 +836,7 @@ int handle_client(int client_socket, const char* logFileName) {
     
     // UPD_USER     - Update forwarding details for the client number in the CFS system
     else if (strcmp(token_params, "UPD_USER") == 0) {
+        memset(response_message, '\0', sizeof(response_message));
         printf("[INFO] Request recieved to update user forwarding data\n");
         sprintf(logMsg, "[INFO] Request recieved to update user forwarding data\n");
         fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
