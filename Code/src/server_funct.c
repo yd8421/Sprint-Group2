@@ -24,13 +24,13 @@ char* get_current_time() {
     time(&rawTime);
     timeInfo = localtime(&rawTime);
 
-    buffer = (char*)malloc(20 * sizeof(char));
+    buffer = (char*)malloc(DT_STORE_LENGTH * sizeof(char));
     if (buffer == NULL) {
         perror("[ERROR] Failed to allocate memory to get current time");
         return NULL;
     }
 
-    strftime(buffer, 20, "%Y-%m-%d %H:%M:%S", timeInfo);
+    strftime(buffer, DT_STORE_LENGTH, "%Y-%m-%d %H:%M:%S", timeInfo);
 
     return buffer;
 }
@@ -126,8 +126,8 @@ void close_database() {
 // Function to add login details to SQLite database
 char* add_login_details(const char* userId, const char* password)
 {
-  char sql_query[256];
-  char* responseData = (char*)malloc(256 * sizeof(char));
+  char sql_query[SQL_QUERY_LENGTH];
+  char* responseData = (char*)malloc(SQL_QUERY_LENGTH * sizeof(char));
   char *zErrMsg = 0;
   int returnCode;
   sprintf(sql_query, "INSERT INTO authinfo VALUES (");
@@ -168,8 +168,8 @@ char* add_login_details(const char* userId, const char* password)
 
 // Function to add user data to SQLite database
 char* add_user_data(const char* clientNumber, const char* forwardingNumber, int isRegistered, int isActivated, int forwardingType) {
-    char sql_query[256];
-    char* responseData = (char*)malloc(256 * sizeof(char));
+    char sql_query[SQL_QUERY_LENGTH];
+    char* responseData = (char*)malloc(SQL_QUERY_LENGTH * sizeof(char));
     char *zErrMsg = 0;
     int returnCode;
     sprintf(sql_query, "INSERT INTO forwardinfo VALUES (");
@@ -213,7 +213,7 @@ char* add_user_data(const char* clientNumber, const char* forwardingNumber, int 
 
 // Function to delete login details from SQLite database by userId
 void delete_login_details(const char* userId) {
-    char sql_query[100];
+    char sql_query[SQL_QUERY_LENGTH];
     sprintf(sql_query, "DELETE FROM authinfo WHERE clientNumber = '%s';", userId);
     
     char* errMsg = 0;
@@ -232,7 +232,7 @@ void delete_login_details(const char* userId) {
 
 // Function to delete user data from SQLite database by client_number
 void delete_user_data(const char* client_number) {
-    char sql_query[100];
+    char sql_query[SQL_QUERY_LENGTH];
     sprintf(sql_query, "DELETE FROM forwardinfo WHERE clientNumber ='%s';", client_number);
     
     char* errMsg = 0;
@@ -251,7 +251,7 @@ void delete_user_data(const char* client_number) {
 
 // Function to view all records from a table 'authinfo'
 char* view_auth_table() {
-    char sql_query[50];
+    char sql_query[SQL_QUERY_LENGTH];
     char* errMsg = 0;
     char* response_data = (char*)malloc(RESPONSE_SIZE * sizeof(char));
     sprintf(sql_query, "SELECT * FROM authinfo;");
@@ -294,7 +294,7 @@ char* view_auth_table() {
 
 // Function to view all records from a table 'forwardinfo'
 char* view_forwarding_table() {
-    char sql_query[50];
+    char sql_query[SQL_QUERY_LENGTH];
     char* response_data = (char*)malloc(RESPONSE_SIZE * sizeof(char));
     char* errMsg = 0;
     sprintf(sql_query, "SELECT * FROM forwardinfo;");
@@ -354,8 +354,8 @@ char* view_forwarding_table() {
 char* validate_auth_info(const char* clientNumber, const char* password)
 {
     char* responseData = (char*)malloc(RESPONSE_SIZE * sizeof(char));
-    char sql_query[256];
-    char resp_password[25];
+    char sql_query[SQL_QUERY_LENGTH];
+    char resp_password[PASSWORD_LENGTH];
     char *errMsg = 0;
     int returnCode;
 
@@ -398,8 +398,8 @@ char* validate_auth_info(const char* clientNumber, const char* password)
 char* view_cfs_status(const char* clientNumber)
 {
     char* responseData = (char*)malloc(RESPONSE_SIZE * sizeof(char));
-    char sql_query[256];
-    char forwardNumber[11];
+    char sql_query[SQL_QUERY_LENGTH];
+    char forwardNumber[PHONE_NO_LENGTH];
     char *errMsg = 0;
     int returnCode;
 
@@ -537,8 +537,8 @@ char* view_cfs_status(const char* clientNumber)
 char* view_cfs_code(const char* clientNumber)
 {
     char* responseData = (char*)malloc(RESPONSE_SIZE * sizeof(char));
-    char sql_query[256];
-    char forwardNumber[11];
+    char sql_query[SQL_QUERY_LENGTH];
+    char forwardNumber[PHONE_NO_LENGTH];
     char *errMsg = 0;
     int returnCode;
 
@@ -669,7 +669,7 @@ char* view_cfs_code(const char* clientNumber)
 
 // Function to update forwarding number for a client
 int update_forwarding_number(const char* clientNumber, const char* forwardingNumber){
-    char sql_query[256];
+    char sql_query[SQL_QUERY_LENGTH];
     char *zErrMsg = 0;
     int returnCode;
 
@@ -692,7 +692,7 @@ int update_forwarding_number(const char* clientNumber, const char* forwardingNum
 // Function to update registration status for a client
 int update_registration_status(const char* clientNumber, int isRegistered)
 {
-    char sql_query[256];
+    char sql_query[SQL_QUERY_LENGTH];
     char *zErrMsg = 0;
     int returnCode;
 
@@ -715,7 +715,7 @@ int update_registration_status(const char* clientNumber, int isRegistered)
 // Function to update call forwarding activation status for a client
 int update_activation_status(const char* clientNumber, int isActivated)
 {
-    char sql_query[256];
+    char sql_query[SQL_QUERY_LENGTH];
     char *zErrMsg = 0;
     int returnCode;
 
@@ -738,7 +738,7 @@ int update_activation_status(const char* clientNumber, int isActivated)
 // Function to update forwarding type for a client
 int update_forwarding_type(const char* clientNumber, int forwardingType)
 {
-    char sql_query[256];
+    char sql_query[SQL_QUERY_LENGTH];
     char *zErrMsg = 0;
     int returnCode;
 
@@ -760,8 +760,8 @@ int update_forwarding_type(const char* clientNumber, int forwardingType)
 
 // Function to handle client requests
 int handle_client(int client_socket, const char* logFileName) {
-    char buffer[1024] = {0};
-    char logMsg[128];
+    char buffer[BUFFER_SIZE] = {0};
+    char logMsg[LOG_MSG_LENGTH];
     FILE* logger = fopen(logFileName, "a");
     // if (fseek(logger, 0, SEEK_END) != 0) {
     //     perror("[ERROR] Error seeking to end of log file");

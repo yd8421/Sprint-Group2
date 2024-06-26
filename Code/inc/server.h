@@ -14,7 +14,14 @@
 #define PORT 12345
 #define MAX_CLIENTS 5
 #define RESPONSE_SIZE 8192
+#define BUFFER_SIZE 1024
 #define ENCRYPT_KEY 34
+
+#define DT_STORE_LENGTH 20
+#define SQL_QUERY_LENGTH 256
+#define PASSWORD_LENGTH 25
+#define PHONE_NO_LENGTH 11
+#define LOG_MSG_LENGTH 128
 
 extern void interrupt_handler(int);
 
