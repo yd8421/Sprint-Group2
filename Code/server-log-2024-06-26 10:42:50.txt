@@ -1,0 +1,18 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 10:42:50
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+[INFO] Buffer: CFS_CODE 77777
+[INFO] Request recieved to retrieve code for user forwarding data of '77777'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[INFO] Buffer: CFS_CODE 300
+[INFO] Request recieved to retrieve code for user forwarding data of '300'
+[INFO] Sent the following response to the client: 
+UR
+[DEBUG] Sent the following response to the client: 
+wt,
+[INFO] Handling incoming client communication

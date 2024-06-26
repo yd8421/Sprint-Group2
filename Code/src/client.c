@@ -42,6 +42,18 @@ int main(){
 		choice = main_menu();
 
 		if(choice == 1){
+			
+			int flag =0;
+
+			check(command);
+			
+			send_recv_query(client_fd, command, buffer);
+			
+			if(buffer[0] == 'U')flag =1;
+
+			memset(command, '\0', sizeof(command));
+			memset(buffer, '\0', sizeof(buffer));
+			
 			call(command);
 
 			char command_copy[40];
@@ -52,7 +64,7 @@ int main(){
 				
 			send_recv_query(client_fd, command, buffer);
 			
-			if(strcmp(buffer, "NF\n") == 0 || strcmp(buffer, "UR\n") == 0){
+			if(flag == 1 || strcmp(buffer, "NF\n") == 0 || strcmp(buffer, "UR\n") == 0){
 		//		system("clear");
 				printf("Calling number: %s\n\n", call_no);
 		
@@ -151,6 +163,8 @@ int main(){
 			int f = 0;
 			while(try--){
 				
+				if(try<2)printf("Wrong password. Try again\n\n");
+
 				login(command);
 		
 				send_recv_query(client_fd, command, buffer);
