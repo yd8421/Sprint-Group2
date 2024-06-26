@@ -37,6 +37,7 @@ int main() {
     sprintf(logMsg, "[INFO] Time: %s\n\n", initTime);
     printf("[INFO] Time: %s\n\n", initTime);
     fwrite(logMsg, sizeof(char), strlen(logMsg), logger);
+    free(initTime);
 
     // Initialize SQLite database
     sprintf(logMsg, "[INFO] Opening database\n");
@@ -56,6 +57,7 @@ int main() {
         perror(errorLogMsg);
         fwrite(errorLogMsg, sizeof(char), strlen(errorLogMsg), logger);
         fclose(logger);
+        close_database();
         exit(EXIT_FAILURE);
     }
     
@@ -66,6 +68,7 @@ int main() {
         perror(errorLogMsg);
         fwrite(errorLogMsg, sizeof(char), strlen(errorLogMsg), logger);
         fclose(logger);
+        close_database();
         exit(EXIT_FAILURE);
     }
     address.sin_family = AF_INET;
@@ -78,6 +81,7 @@ int main() {
         perror(errorLogMsg);
         fwrite(errorLogMsg, sizeof(char), strlen(errorLogMsg), logger);
         fclose(logger);
+        close_database();
         exit(EXIT_FAILURE);
     }
     
@@ -87,6 +91,7 @@ int main() {
         perror(errorLogMsg);
         fwrite(errorLogMsg, sizeof(char), strlen(errorLogMsg), logger);
         fclose(logger);
+        close_database();
         exit(EXIT_FAILURE);
     }
     
