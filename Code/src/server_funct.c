@@ -364,8 +364,10 @@ char* view_cfs_status(const char* clientNumber)
     // Status flag for CFS
     // 0 - None
     // 1 - Registered
-    // 2 - Registered and Activated
-    int statusFlag=0;
+    // 0 - Not Activated
+    // 1 - Activated
+    int statusFlag1=0;
+    int statusFlag2=0;
 
     // For forwarding type
     // 0  CF_NOTSET
@@ -374,30 +376,43 @@ char* view_cfs_status(const char* clientNumber)
     // 3  CF_NOREPLY
     int forwType=0;
 
-    while (sqlite3_step(res) == SQLITE_ROW) {
-        statusFlag+=atoi(sqlite3_column_text(res, 0));
-        statusFlag+=atoi(sqlite3_column_text(res, 1));
+        while (sqlite3_step(res) == SQLITE_ROW) {
+        statusFlag1=atoi(sqlite3_column_text(res, 0));
+        statusFlag2=atoi(sqlite3_column_text(res, 1));
         forwType=atoi(sqlite3_column_text(res, 2));
     }
     //printf("Statusflag: %d\n", statusFlag);
 
-    switch(statusFlag)
+    switch(statusFlag1)
     {
-    case 0: printf("[INFO] User has not registered for CFS\n");
-            sprintf(responseData, "[SERVER] User has not registered for CFS\n");
-            break;
-    case 1: printf("[INFO] User has not activated CFS\n");
-            sprintf(responseData, "[SERVER] User has not activated CFS\n");
-            break;
-    case 2: printf("[INFO] User has activated CFS\n");
-            sprintf(responseData, "[SERVER] User has activated CFS\n");
-            break;
+        case 0: printf("[INFO] User has not registered for CFS\n");
+                sprintf(responseData, "[SERVER] User has not registered for CFS\n");
+                break;
+        case 1: printf("[INFO] User has registered for CFS\n");
+                sprintf(responseData, "[SERVER] User has registered for CFS\n");
+                break;
+    }
+    switch(statusFlag2)
+    {
+        case 0: printf("[INFO] User has not activated CFS\n");
+                sprintf(responseData, "[SERVER] User has not activated CFS\n");
+                break;
+        case 1: printf("[INFO] User has activated CFS\n");
+                sprintf(responseData, "[SERVER] User has activated CFS\n");
+                break;
     }
 
-    if(statusFlag != 2)
+    if(statusFlag1 == 0)
     {
         printf("[INFO] Call will be connected to %s\n", clientNumber);
-        sprintf(responseData + strlen(responseData), "[SERVER] Call will be connected to %s\n", clientNumber);
+        sprintf(responseData + strlen(responseData), "Call will be connected to %s\n", clientNumber);
+        return responseData;
+    }
+
+    if(statusFlag1 != 1 && statusFlag2 != 1)
+    {
+        printf("[INFO] Call will be connected to %s\n", clientNumber);
+        sprintf(responseData + strlen(responseData), "Call will be connected to %s\n", clientNumber);
         return responseData;
     }
 
@@ -473,8 +488,10 @@ char* view_cfs_code(const char* clientNumber)
     // Status flag for CFS
     // 0 - None
     // 1 - Registered
-    // 2 - Registered and Activated
-    int statusFlag=0;
+    // 0 - Not Activated
+    // 1 - Activated
+    int statusFlag1=0;
+    int statusFlag2=0;
 
     // For forwarding type
     // 0  CF_NOTSET
@@ -484,26 +501,39 @@ char* view_cfs_code(const char* clientNumber)
     int forwType=0;
 
     while (sqlite3_step(res) == SQLITE_ROW) {
-        statusFlag+=atoi(sqlite3_column_text(res, 0));
-        statusFlag+=atoi(sqlite3_column_text(res, 1));
+        statusFlag1=atoi(sqlite3_column_text(res, 0));
+        statusFlag2=atoi(sqlite3_column_text(res, 1));
         forwType=atoi(sqlite3_column_text(res, 2));
     }
     //printf("Statusflag: %d\n", statusFlag);
 
-    switch(statusFlag)
+    switch(statusFlag1)
     {
-    case 0: printf("[INFO] User has not registered for CFS\n");
-            //sprintf(responseData, "[SERVER] User has not registered for CFS\n");
-            break;
-    case 1: printf("[INFO] User has not activated CFS\n");
-            //sprintf(responseData, "[SERVER] User has not activated CFS\n");
-            break;
-    case 2: printf("[INFO] User has activated CFS\n");
-            //sprintf(responseData, "[SERVER] User has activated CFS\n");
-            break;
+        case 0: printf("[INFO] User has not registered for CFS\n");
+                //sprintf(responseData, "[SERVER] User has not registered for CFS\n");
+                break;
+        case 1: printf("[INFO] User has registered for CFS\n");
+                //sprintf(responseData, "[SERVER] User has not registered for CFS\n");
+                break;
+    }
+    switch(statusFlag2)
+    {
+        case 0: printf("[INFO] User has not activated CFS\n");
+                //sprintf(responseData, "[SERVER] User has not activated CFS\n");
+                break;
+        case 1: printf("[INFO] User has activated CFS\n");
+                //sprintf(responseData, "[SERVER] User has activated CFS\n");
+                break;
     }
 
-    if(statusFlag != 2)
+    if(statusFlag1 == 0)
+    {
+        printf("[INFO] Call will be connected to %s\n", clientNumber);
+        sprintf(responseData + strlen(responseData), "UR\n");
+        return responseData;
+    }
+
+    if(statusFlag1 != 1 && statusFlag2 != 1)
     {
         printf("[INFO] Call will be connected to %s\n", clientNumber);
         sprintf(responseData + strlen(responseData), "NF\n");
