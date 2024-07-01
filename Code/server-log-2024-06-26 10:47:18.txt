@@ -1,0 +1,21 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 10:47:18
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+2024-06-26 10:47:33 [INFO] Buffer: VIEW_USER
+2024-06-26 10:47:33 [INFO] Request recieved to view user forwarding data
+2024-06-26 10:47:33 [DEBUG] Sent the following response to the client: 
+[SERVER] There are no records in the forwarding table
+2024-06-26 10:47:33 [DEBUG] Sent the following response to the client: 
+}ugtxgtBvŠ‡”‡Bƒ”‡B‘B”‡…‘”†•B‹B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡,
+2024-06-26 10:47:48 [INFO] Buffer: UPD_USER U NA -1 -1 U
+2024-06-26 10:47:48 [INFO] Request recieved to update user forwarding data
+[INFO] Updated forwarding type
+[INFO] Forward Type: Unconditional
+2024-06-26 10:47:48 [DEBUG] Sent the following response to the client: 
+[SERVER] Forwarding type for 'U' has been updated to 'Unconditional'
+2024-06-26 10:47:48 [DEBUG] Sent the following response to the client: 
+}ugtxgtBh‘”™ƒ”†‹‰B–›’‡Bˆ‘”BIwIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIw…‘†‹–‹‘ƒI,
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

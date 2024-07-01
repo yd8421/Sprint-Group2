@@ -1,0 +1,260 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 11:03:39
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+2024-06-26 11:05:01 [INFO] Buffer: ADD_USER 9090909090 8080808080 1 1 U
+[INFO] Request recieved to add user '9090909090'
+2024-06-26 11:05:01 [DEBUG] Sent the following response to the client: 
+[SERVER] User info '9090909090' has been added to the database
+2024-06-26 11:05:01 [DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BI[R[R[R[R[RIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+2024-06-26 11:05:21 [INFO] Buffer: VIEW_USER
+2024-06-26 11:05:21 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:05:21 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 8080808080   | 1           | 1           | 1        
+2024-06-26 11:05:21 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBZRZRZRZRZRBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,
+2024-06-26 11:06:52 [INFO] Buffer: ADD_USER 5050505050 1233456789 1 0 B
+[INFO] Request recieved to add user '5050505050'
+2024-06-26 11:06:52 [DEBUG] Sent the following response to the client: 
+[SERVER] User info '5050505050' has been added to the database
+2024-06-26 11:06:52 [DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BIWRWRWRWRWRIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+2024-06-26 11:06:57 [INFO] Buffer: VIEW_USER
+2024-06-26 11:06:57 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:06:57 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 8080808080   | 1           | 1           | 1        
+5050505050    | 1233456789   | 1           | 0           | 3        
+2024-06-26 11:06:57 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBZRZRZRZRZRBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,WRWRWRWRWRBBBBBSTUUVWXYZ[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,
+2024-06-26 11:07:46 [INFO] Buffer: UPD_USER 9090909090 111111111 -1 -1 O
+2024-06-26 11:07:46 [INFO] Request recieved to update user forwarding data
+[INFO] Forwarding number for '9090909090' has been updated to '111111111'
+2024-06-26 11:07:46 [DEBUG] Sent the following response to the client: 
+[SERVER] Forwarding number for '9090909090' has been updated to '111111111'
+2024-06-26 11:07:46 [DEBUG] Sent the following response to the client: 
+}ugtxgtBh‘”™ƒ”†‹‰B—„‡”Bˆ‘”BI[R[R[R[R[RIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BISSSSSSSSSI,
+2024-06-26 11:07:51 [INFO] Buffer: VIEW_USER
+2024-06-26 11:07:51 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:07:51 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 1           | 1           | 1        
+5050505050    | 1233456789   | 1           | 0           | 3        
+2024-06-26 11:07:51 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,WRWRWRWRWRBBBBBSTUUVWXYZ[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,
+2024-06-26 11:08:21 [INFO] Buffer: UPD_USER 9090909090 NA 0 -1 O
+2024-06-26 11:08:21 [INFO] Request recieved to update user forwarding data
+[INFO] Registration status for '9090909090' has been updated to 'UNREGISTERED'
+2024-06-26 11:08:21 [DEBUG] Sent the following response to the client: 
+[SERVER] Registration status for '9090909090' has been updated to 'UNREGISTERED'
+2024-06-26 11:08:21 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BI[R[R[R[R[RIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIwptgikuvgtgfI,
+2024-06-26 11:08:26 [INFO] Buffer: VIEW_USER
+2024-06-26 11:08:26 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:08:26 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 0           | 1           | 1        
+5050505050    | 1233456789   | 1           | 0           | 3        
+2024-06-26 11:08:26 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,WRWRWRWRWRBBBBBSTUUVWXYZ[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,
+2024-06-26 11:09:32 [INFO] Buffer: ADD_USER 4444444444 6666666666 1 1 N
+[INFO] Request recieved to add user '4444444444'
+2024-06-26 11:09:32 [DEBUG] Sent the following response to the client: 
+[SERVER] User info '4444444444' has been added to the database
+2024-06-26 11:09:32 [DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BIVVVVVVVVVVIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+2024-06-26 11:09:35 [INFO] Buffer: VIEW_USER
+2024-06-26 11:09:35 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:09:35 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 0           | 1           | 1        
+5050505050    | 1233456789   | 1           | 0           | 3        
+4444444444    | 6666666666   | 1           | 1           | 2        
+2024-06-26 11:09:35 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,WRWRWRWRWRBBBBBSTUUVWXYZ[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,VVVVVVVVVVBBBBBXXXXXXXXXXBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+2024-06-26 11:10:42 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:10:42 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:10:42 [DEBUG] Sent the following response to the client: 
+UR
+2024-06-26 11:10:42 [DEBUG] Sent the following response to the client: 
+wt,
+2024-06-26 11:11:04 [INFO] Buffer: CFS_CODE 4444444444
+2024-06-26 11:11:04 [INFO] Call: Request recieved to retrieve code for user forwarding data of '4444444444'
+2024-06-26 11:11:04 [DEBUG] Sent the following response to the client: 
+F 6666666666 2
+2024-06-26 11:11:04 [DEBUG] Sent the following response to the client: 
+hBXXXXXXXXXXBT,
+2024-06-26 11:11:11 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:11:11 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:11:11 [DEBUG] Sent the following response to the client: 
+UR
+2024-06-26 11:11:11 [DEBUG] Sent the following response to the client: 
+wt,
+2024-06-26 11:11:17 [INFO] Buffer: CFS_CODE 4444444444
+2024-06-26 11:11:17 [INFO] Call: Request recieved to retrieve code for user forwarding data of '4444444444'
+2024-06-26 11:11:17 [DEBUG] Sent the following response to the client: 
+F 6666666666 2
+2024-06-26 11:11:17 [DEBUG] Sent the following response to the client: 
+hBXXXXXXXXXXBT,
+2024-06-26 11:11:30 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:11:30 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:11:30 [DEBUG] Sent the following response to the client: 
+UR
+2024-06-26 11:11:30 [DEBUG] Sent the following response to the client: 
+wt,
+2024-06-26 11:11:38 [INFO] Buffer: CFS_CODE 4444444444
+2024-06-26 11:11:38 [INFO] Call: Request recieved to retrieve code for user forwarding data of '4444444444'
+2024-06-26 11:11:38 [DEBUG] Sent the following response to the client: 
+F 6666666666 2
+2024-06-26 11:11:38 [DEBUG] Sent the following response to the client: 
+hBXXXXXXXXXXBT,
+2024-06-26 11:12:34 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:12:34 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:12:34 [DEBUG] Sent the following response to the client: 
+UR
+2024-06-26 11:12:34 [DEBUG] Sent the following response to the client: 
+wt,
+2024-06-26 11:12:49 [INFO] Buffer: ADD_LOGIN 2222222222 pass
+2024-06-26 11:12:49 [INFO] Request recieved to add login
+2024-06-26 11:12:49 [DEBUG] Sent the following response to the client: 
+[SERVER] User login info '2222222222' has been added to the database
+2024-06-26 11:12:49 [DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‘‰‹B‹ˆ‘BITTTTTTTTTTIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+2024-06-26 11:13:05 [INFO] Buffer: ADD_USER 2222222222 1000000000 1 1 N
+[INFO] Request recieved to add user '2222222222'
+2024-06-26 11:13:05 [DEBUG] Sent the following response to the client: 
+[SERVER] User info '2222222222' has been added to the database
+2024-06-26 11:13:05 [DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B‹ˆ‘BITTTTTTTTTTIBŠƒ•B„‡‡Bƒ††‡†B–‘B–Š‡B†ƒ–ƒ„ƒ•‡,
+2024-06-26 11:13:11 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:13:11 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:13:11 [DEBUG] Sent the following response to the client: 
+F 1000000000 2
+2024-06-26 11:13:11 [DEBUG] Sent the following response to the client: 
+hBSRRRRRRRRRBT,
+2024-06-26 11:13:18 [INFO] Buffer: CFS_CODE 4444444444
+2024-06-26 11:13:18 [INFO] Call: Request recieved to retrieve code for user forwarding data of '4444444444'
+2024-06-26 11:13:18 [DEBUG] Sent the following response to the client: 
+F 6666666666 2
+2024-06-26 11:13:18 [DEBUG] Sent the following response to the client: 
+hBXXXXXXXXXXBT,
+2024-06-26 11:13:45 [INFO] Buffer: AUTH_USER 2222222222 pass
+2024-06-26 11:13:45 [INFO] Request recieved to authenticate user
+2024-06-26 11:13:45 [DEBUG] Sent the following response to the client: 
+AUTH_SUCCESS
+2024-06-26 11:13:45 [DEBUG] Sent the following response to the client: 
+cwvjuweeguu,
+2024-06-26 11:14:17 [INFO] Buffer: UPD_USER 2222222222 NA -1 -1 P
+2024-06-26 11:14:17 [INFO] Request recieved to update user forwarding data
+[INFO] Updated forwarding type
+2024-06-26 11:14:17 [DEBUG] Sent the following response to the client: 
+[SERVER] Forwarding type for '2222222222' has been updated to 2024-06-26 11:14:17 [DEBUG] Sent the following response to the client: 
+}ugtxgtBh‘”™ƒ”†‹‰B–›’‡Bˆ‘”BITTTTTTTTTTIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘B
+2024-06-26 11:14:45 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:14:45 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:14:45 [DEBUG] Sent the following response to the client: 
+NF
+2024-06-26 11:14:45 [DEBUG] Sent the following response to the client: 
+ph,
+2024-06-26 11:14:45 [INFO] Buffer: UPD_USER 2222222222 NA 1 -1 O
+2024-06-26 11:14:45 [INFO] Request recieved to update user forwarding data
+[INFO] Registration status for '2222222222' has been updated to 'REGISTERED'
+2024-06-26 11:14:45 [DEBUG] Sent the following response to the client: 
+[SERVER] Registration status for '2222222222' has been updated to 'REGISTERED'
+2024-06-26 11:14:45 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BITTTTTTTTTTIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BItgikuvgtgfI,
+2024-06-26 11:15:05 [INFO] Buffer: AUTH_USER 2222222222 pass
+2024-06-26 11:15:05 [INFO] Request recieved to authenticate user
+2024-06-26 11:15:05 [DEBUG] Sent the following response to the client: 
+AUTH_SUCCESS
+2024-06-26 11:15:05 [DEBUG] Sent the following response to the client: 
+cwvjuweeguu,
+2024-06-26 11:15:07 [INFO] Buffer: UPD_USER 2222222222 NA 0 -1 O
+2024-06-26 11:15:07 [INFO] Request recieved to update user forwarding data
+[INFO] Registration status for '2222222222' has been updated to 'UNREGISTERED'
+2024-06-26 11:15:07 [DEBUG] Sent the following response to the client: 
+[SERVER] Registration status for '2222222222' has been updated to 'UNREGISTERED'
+2024-06-26 11:15:07 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡‰‹•–”ƒ–‹‘B•–ƒ–—•Bˆ‘”BITTTTTTTTTTIBŠƒ•B„‡‡B—’†ƒ–‡†B–‘BIwptgikuvgtgfI,
+2024-06-26 11:15:10 [INFO] Buffer: CFS_CODE 2222222222
+2024-06-26 11:15:10 [INFO] Call: Request recieved to retrieve code for user forwarding data of '2222222222'
+2024-06-26 11:15:10 [DEBUG] Sent the following response to the client: 
+UR
+2024-06-26 11:15:10 [DEBUG] Sent the following response to the client: 
+wt,
+2024-06-26 11:15:14 [INFO] Buffer: ADD_LOGIN 2222222222 pass
+2024-06-26 11:15:14 [INFO] Request recieved to add login
+2024-06-26 11:15:14 [DEBUG] Sent the following response to the client: 
+[ERROR] User '2222222222' is already registered to the CFS
+2024-06-26 11:15:14 [DEBUG] Sent the following response to the client: 
+}gttqtBw•‡”BITTTTTTTTTTIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,
+2024-06-26 11:15:57 [INFO] Buffer: gzkv
+2024-06-26 11:15:57 [WARN] Unknown command received from client: gzkv
+2024-06-26 11:15:57 [DEBUG] Sent the following response to the client: 
+[ERROR] User '2222222222' is already registered to the CFS
+2024-06-26 11:15:57 [DEBUG] Sent the following response to the client: 
+}gttqtBw•‡”BITTTTTTTTTTIB‹•Bƒ”‡ƒ†›B”‡‰‹•–‡”‡†B–‘B–Š‡Behu,
+2024-06-26 11:15:57 [ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+2024-06-26 11:16:07 [INFO] Buffer: VIEW_USER
+2024-06-26 11:16:07 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:16:07 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 0           | 1           | 1        
+5050505050    | 1233456789   | 1           | 0           | 3        
+4444444444    | 6666666666   | 1           | 1           | 2        
+2222222222    | 1000000000   | 0           | 1           | 0        
+2024-06-26 11:16:07 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,WRWRWRWRWRBBBBBSTUUVWXYZ[BBBBSBBBBBBBBBBBBRBBBBBBBBBBBBUBBBBBBBB,VVVVVVVVVVBBBBBXXXXXXXXXXBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,TTTTTTTTTTBBBBBSRRRRRRRRRBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,
+2024-06-26 11:16:42 [INFO] Buffer: DEL_USER 5050505050
+2024-06-26 11:16:42 [INFO] Request recieved to delete user info
+[INFO] Request recieved to delete user info of '5050505050'
+2024-06-26 11:16:42 [DEBUG] Sent the following response to the client: 
+[SERVER] User details for '5050505050' has been deleted
+2024-06-26 11:16:42 [DEBUG] Sent the following response to the client: 
+}ugtxgtBw•‡”B†‡–ƒ‹•Bˆ‘”BIWRWRWRWRWRIBŠƒ•B„‡‡B†‡‡–‡†,
+2024-06-26 11:16:46 [INFO] Buffer: VIEW_USER
+2024-06-26 11:16:46 [INFO] Request recieved to view user forwarding data
+2024-06-26 11:16:46 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 0           | 1           | 1        
+4444444444    | 6666666666   | 1           | 1           | 2        
+2222222222    | 1000000000   | 0           | 1           | 0        
+2024-06-26 11:16:46 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,VVVVVVVVVVBBBBBXXXXXXXXXXBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,TTTTTTTTTTBBBBBSRRRRRRRRRBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
+2024-06-26 11:55:35 [INFO] Buffer: gzkv
+2024-06-26 11:55:35 [WARN] Unknown command received from client: gzkv
+2024-06-26 11:55:35 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 0           | 1           | 1        
+4444444444    | 6666666666   | 1           | 1           | 2        
+2222222222    | 1000000000   | 0           | 1           | 0        
+2024-06-26 11:55:35 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,VVVVVVVVVVBBBBBXXXXXXXXXXBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,TTTTTTTTTTBBBBBSRRRRRRRRRBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,
+2024-06-26 11:55:35 [ERROR] Error reading from client
+[INFO] Handling incoming client communication
+[INFO] Closing the socket

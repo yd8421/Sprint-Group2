@@ -1,0 +1,18 @@
+[INFO] Starting server
+[INFO] Time: 2024-06-26 19:07:42
+
+[INFO] Opening database
+[INFO] Server listening on port 12345...
+2024-06-26 19:08:26 [INFO] Buffer: VIEW_USER
+2024-06-26 19:08:26 [INFO] Request recieved to view user forwarding data
+2024-06-26 19:08:26 [DEBUG] Sent the following response to the client: 
+[SERVER] Records from the forwarding table:
+Client Number | Forw. Number | Reg. Status | Act. Status | Forw. Type
+-----------------------------------------------------------------------
+9090909090    | 111111111    | 0           | 1           | 1        
+4444444444    | 6666666666   | 1           | 1           | 2        
+2222222222    | 1000000000   | 0           | 1           | 0        
+2024-06-26 19:08:26 [DEBUG] Sent the following response to the client: 
+}ugtxgtBt‡…‘”†•Bˆ”‘B–Š‡Bˆ‘”™ƒ”†‹‰B–ƒ„‡\,e‹‡–Bp—„‡”BBh‘”™PBp—„‡”BBt‡‰PBu–ƒ–—•BBc…–PBu–ƒ–—•BBh‘”™PBv›’‡,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,[R[R[R[R[RBBBBBSSSSSSSSSBBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBSBBBBBBBB,VVVVVVVVVVBBBBBXXXXXXXXXXBBBBSBBBBBBBBBBBBSBBBBBBBBBBBBTBBBBBBBB,TTTTTTTTTTBBBBBSRRRRRRRRRBBBBRBBBBBBBBBBBBSBBBBBBBBBBBBRBBBBBBBB,
+[INFO] Handling incoming client communication
+[INFO] Closing the socket
